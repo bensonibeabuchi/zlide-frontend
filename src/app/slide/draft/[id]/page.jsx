@@ -50,10 +50,10 @@ export default function DetailSlide() {
     };
 
     const updatePresentation = async () => {
-        // e.preventDefault();
-        setIsLoading(true); // Set loading state to true when update starts
+        setIsLoading(true); 
 
-        const url = `http://localhost:8000/api/presentation/zlide/${id}/`;
+        // const url = `http://localhost:8000/api/presentation/zlide/${id}/`;
+        const url = `https://zlide-backend-production.up.railway.app/api/presentation/zlide/${id}/`;
         const updatedData = {
             presentation_data: formData,
             presentation_name: presentationName
@@ -66,17 +66,17 @@ export default function DetailSlide() {
                 }
             });
             setResponse(result.data);
-            router.push('/slide/dashboard'); // Navigate to dashboard after update
-            return result.data; // Return the result data
+            router.push('/slide/dashboard'); 
+            return result.data; 
         } catch (error) {
             console.error(error);
             setError(error);
-            throw error; // Re-throw the error to be caught in handleDownloadPPT
-
+            throw error; 
         } finally {
-            setIsLoading(false); // Set loading state to false when update completes
+            setIsLoading(false); 
           }
     };
+
 
     // This function handles the form submission event
     const handleUpdatePresentation = async (e) => {

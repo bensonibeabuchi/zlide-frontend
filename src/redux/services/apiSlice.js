@@ -2,13 +2,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setAuth, logout } from '../features/authSlice';
 import { Mutex } from 'async-mutex';
-import Cookies from 'js-cookie';
 
 
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://127.0.0.1:8000/api',
+  baseUrl: 'https://zlide-backend-production.up.railway.app/api',
   credentials: 'include',
 });
 
@@ -16,24 +15,14 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result.error) {
-    console.error('ERROR from HERE apiSlice:', result.error);
-  }
+  // if (result.error) {
+  //   console.error('ERROR from HERE apiSlice:', result.error);
+  // }
 
   if (result.error && result.error.status === 401) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-		// Get the refresh token from cookies
-        const refreshToken = Cookies.get('refresh');
-        const accessToken = Cookies.get('access');
-		console.log('ACCESS TOKEN:', accessToken);
-		console.log('REFRESH TOKEN:', refreshToken);
-		
-		if (!refreshToken) {
-			throw new Error('No refresh token found');
-		  }
-
         const refreshResult = await baseQuery(
           {
             url: '/jwt/refresh/',
@@ -43,7 +32,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
           api,
           extraOptions
         );
-		console.log('REFRSHRESULT:', refreshResult)
+		// console.log('REFRSHRESULT:', refreshResult)
 
         if (refreshResult.data) {
           api.dispatch(setAuth(refreshResult.data)); // Ensure you pass the correct data
