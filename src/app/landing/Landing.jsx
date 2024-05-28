@@ -104,11 +104,11 @@ export default function Landing() {
     <div className='text-center mb-40 my-8 px-8'>
       <p className='md:text-2xl text-lg font-semibold py-8'>Trusted by industry-leading companies worldwide</p>
       <div className='grid grid-cols-5 md:w-[1024px] mx-auto items-center text-center justify-center'>
-        <Image src="/images/slack_logo.png" alt="Zlide logo" width={80} height={40} className='md:w-40 p-1' />
-        <Image src="/images/hsbc_logo.png" alt="Zlide logo" width={80} height={40} className='md:w-40 p-1' />
-        <Image src="/images/tesla_logo.png" alt="Zlide logo" width={80} height={40} className='md:w-40 p-1' />
-        <Image src="/images/Univelcity_logo.png" alt="Zlide logo" width={80} height={40} className='md:w-40 p-1' />
-        <Image src="/images/Logo.png" alt="Zlide logo" width={80} height={40} className='md:w-40 p-1' />
+        <Image src="/images/slack_logo.png" alt="Zlide logo" width={800} height={40} className='md:w-40 p-1' />
+        <Image src="/images/hsbc_logo.png" alt="Zlide logo" width={800} height={40} className='md:w-40 p-1' />
+        <Image src="/images/tesla_logo.png" alt="Zlide logo" width={800} height={40} className='md:w-40 p-1' />
+        <Image src="/images/Univelcity_logo.png" alt="Zlide logo" width={800} height={40} className='md:w-40 p-1' />
+        <Image src="/images/Logo.png" alt="Zlide logo" width={80} height={400} className='md:w-40 p-1' />
       </div>
     </div>
     {isLoading && <LoadingSpinner />}

@@ -5,22 +5,26 @@ import { FaRegCopyright, FaLinkedin, FaFacebook, FaTwitter, FaYoutube, FaInstagr
 export default function Footer() {
   return (
     <div className='w-full mx-auto items-center justify-center bottom-0 relative bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% text-white p-20'>
-      <div className='hidden md:block'>
-        <div className='grid lg:grid-cols-5 md:grid-cols-3 px-24 mb-4'>
-          <div>
-            <Image src="/images/zlide-logo.png" alt="Zlide logo" width={125} height={290} />
+      <div className=''>
+        <div className='lg:justify-center lg:flex lg:flex-row items-center gap-40 space-y-4 md:space-y-0'>
+          <div className="flex">
+              <div className='flex-shrink-0'>
+                <a href="/">
+                  <Image src="/images/zlide-logo.png" height={150} width={150} alt="Zlide logo" className="cursor-pointer" />
+                </a>
+              </div>
           </div>
-          <div>
+          {/* <div>
             <p className='text-xl font-semibold'>Contact</p>
             <ul className='text-sm space-y-8 my-4'>
-              <li>42 Montgomery Road Yaba,</li>
+              <li>Office Address here,</li>
               <li>Lagos Nigeria</li>
-              <li>info@zlide.com</li>
-              <li>(+234) 703 6188 527</li>
+              <li>ibeabuchibenson@gmail.com</li>
+              <li>+234 806 905 9967</li>
               <li>Send an email</li>
             </ul>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
           <p className='text-xl font-semibold'>Company</p>
             <ul className='text-sm space-y-8 my-4'>
               <li>About Us</li>
@@ -29,16 +33,16 @@ export default function Footer() {
               <li>FAQ</li>
               <li>Blog</li>
             </ul>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
           <p className='text-xl font-semibold'>Legal</p>
             <ul className='text-sm space-y-8 my-4'>
               <li>Privacy Policy</li>
               <li>Terms of Service</li>
               <li>Legal</li>
             </ul>
-          </div>
-          <div className='w-96'>
+          </div> */}
+          <div className=''>
             <p className='text-xl font-semibold'>Subscribe</p>
             <p className='text-sm mb-4'>Stay up to date with our newsletter</p>
             <form action="" className='space-x-4 flex'>
@@ -49,7 +53,7 @@ export default function Footer() {
           </div>
 
         </div>
-        <div className='border-t p-4 flex mt-16 justify-between items-center'>
+        <div className='border-t p-4 px-24 flex flex-col mt-16 justify-center gap-8 items-center'>
           <div>
             <p className='flex items-center gap-2'>
               <FaRegCopyright/> 2024 Zlide. All rights Reserved
@@ -68,7 +72,7 @@ export default function Footer() {
         </div>
       </div>
       {/* Mobile screen */}
-      <div className='md:hidden'>
+      {/* <div className='md:hidden'>
       <div className='grid mb-4 space-y-12'>
           <div>
             <Image src="/images/zlide-logo.png" alt="Zlide logo" width={125} height={290} />
@@ -133,7 +137,7 @@ export default function Footer() {
        
         </div>
 
-      </div>
+      </div> */}
 
 
     </div>
