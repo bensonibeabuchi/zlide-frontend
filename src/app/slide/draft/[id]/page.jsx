@@ -119,8 +119,7 @@ export default function DetailSlide() {
                     <div className='h-screen overflow-auto'>
                         <div className=' p-4 pr-16 mt-16 gap-24'>
                             <div className='w-full col-span-3'>
-                                <h1 className='text-4xl px-8 font-semibold bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text mb-8
-                                '>Edit Slide</h1>
+                                <h1 className='text-4xl px-8 font-semibold bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text mb-8'>Edit Slide</h1>
                                 <form onSubmit={handleUpdatePresentation}>
                                     <div className='flex flex-col px-4'>
                                         <label htmlFor="presentation_name:">Presentation Name:</label>
