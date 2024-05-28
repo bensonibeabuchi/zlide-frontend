@@ -1,4 +1,4 @@
-"use client";
+'use client';
 {/* text-[#FFD045] bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] */}
 import React, { useState, useEffect } from 'react';
 import { HiPencilSquare, HiClock, HiArrowRightEndOnRectangle, HiMiniRectangleGroup, HiMiniTrash, HiCog6Tooth, HiChevronLeft, HiChevronRight, HiArrowLeftStartOnRectangle } from "react-icons/hi2";
@@ -8,7 +8,7 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { logout as setLogout } from '@/redux/features/authSlice';
 import { useLogoutMutation } from '@/redux/features/authApiSlice';
 import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
-import LoginModal from './LoginModal';
+
 
 
 export default function NavbarHorizontal() {
@@ -21,11 +21,42 @@ export default function NavbarHorizontal() {
     const pathname = usePathname();
     const id = pathname.split('/').pop();
     
-    // Initialize state with value from localStorage, or default to true
-    const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => {
+     // Initialize state with value from localStorage, or default to true
+     const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => {
+        if (typeof window !== 'undefined') {
+         const savedSidebarState = localStorage.getItem('isSidebarExpanded');
+         return savedSidebarState !== null ? savedSidebarState === 'true' : true;
+            }
+     });
+
+    //   // Save the sidebar state to localStorage whenever it changes
+    // useEffect(() => {
+    //     localStorage.setItem('isSidebarExpanded', isSidebarExpanded);
+    // }, [isSidebarExpanded]);
+
+    // const toggleSidebar = () => {
+    //     setIsSidebarExpanded(prevState => !prevState);
+    // };
+
+    // const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+
+    
+    // Retrieve state from localStorage on component mount
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
         const savedSidebarState = localStorage.getItem('isSidebarExpanded');
-        return savedSidebarState !== null ? savedSidebarState === 'true' : true;
-    });
+        if (savedSidebarState !== null) {
+            setIsSidebarExpanded(savedSidebarState === 'true');
+        }
+        }
+    }, []);
+
+    // Save state to localStorage whenever it changes
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+        localStorage.setItem('isSidebarExpanded', isSidebarExpanded);
+        }
+    }, [isSidebarExpanded]);
 
     const toggleSidebar = () => {
         setIsSidebarExpanded(prevState => !prevState);
@@ -41,8 +72,6 @@ export default function NavbarHorizontal() {
      })
      }
 
-    
-
     const getInitials = (firstName, lastName) => {
       const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';
       const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : '';
@@ -55,26 +84,16 @@ export default function NavbarHorizontal() {
         return `${firstName } ${ lastName}`;
     };
 
-
     const initials = getInitials(user?.first_name, user?.last_name);
     const fullName = getFullName(user?.first_name, user?.last_name);
-
 
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
     };
 
-    
-    // Save the sidebar state to localStorage whenever it changes
-      useEffect(() => {
-        localStorage.setItem('isSidebarExpanded', isSidebarExpanded);
-    }, [isSidebarExpanded]);
-   
-
     useEffect(() => {
         localStorage.setItem('activeButton', activeButton);
     }, [activeButton]);
-
 
 
     useEffect(() => {

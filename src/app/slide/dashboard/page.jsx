@@ -148,7 +148,7 @@ export default function Dashboard() {
               <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mb-8'>
                 <div className='bg-white rounded-xl items-center justify-center text-center flex p-4 my-2 h-[250px]'>
                   <div className='justify-center p-4 flex flex-col items-center text-center bg-gray-100 rounded-md h-full'>
-                    <p className='font-semibold'>Create your first slide. We can&apos;t wait to see what you create next</p>
+                    <p className='font-semibold'>Create your first slide. We can&apos;t wait to see what you create next.</p>
                   </div>
                 </div>
                 {/* <div>

@@ -1,24 +1,25 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import google from "../../../public/images/google.png";
 import { IoIosClose } from 'react-icons/io';
 import { SuccessModal, LoadingSpinner } from '@/components/common';
 import { useActivationMutation } from '@/redux/features/authApiSlice';
 import { toast } from 'react-toastify';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { setAuth } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { continueWithGoogle } from '@/utils';
+import SearchParamsHandler from '@/components/common/SearchParamsHandler';
 
 
 export default function Activate() {
+
   const [activation, { isLoading }] = useActivationMutation();
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
 
   
@@ -31,12 +32,12 @@ export default function Activate() {
 
   const { email, otp,} = formData
 
-  useEffect(() => {
-    const emailFromQuery = searchParams.get('email');
-    if (emailFromQuery) {
-      setFormData((prevData) => ({ ...prevData, email: emailFromQuery }));
-    }
-  }, [searchParams]);
+  // useEffect(() => {
+  //   const emailFromQuery = searchParams.get('email');
+  //   if (emailFromQuery) {
+  //     setFormData((prevData) => ({ ...prevData, email: emailFromQuery }));
+  //   }
+  // }, [searchParams]);
 
 
   const onChange = (event) => {
@@ -67,7 +68,9 @@ export default function Activate() {
       <div className='flex flex-col h-screen mx-auto justify-center items-center'>
         <div className='bg-[#F8F8F6] w-[650px] rounded-lg p-12'>
         <h1 className='font-semibold text-4xl bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text '>Input your OTP</h1> 
-          
+          <Suspense fallback={<div>Loading...</div>}>
+            <SearchParamsHandler setFormData={setFormData} />
+          </Suspense>
           <form className='p-4 mt-4' method='POST' onSubmit={onSubmit}>
             
             <div className='flex-col py-2 hidden'>
@@ -110,6 +113,7 @@ export default function Activate() {
               </button>
             </div>
           </form>
+  
           
           {error && <div className="text-white relative p-4 mt-4 text-center rounded-md justify-center w-11/12 mx-auto mb-12 bg-red-500"> <button onClick={toggleError} >< IoIosClose  size={24} className=' bg-black text-white rounded-full absolute -top-3 left-[490px] mr-8'/></button>  {error}  </div>}
 

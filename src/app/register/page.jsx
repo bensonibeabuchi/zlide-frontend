@@ -197,8 +197,8 @@ export default function Register() {
             {/* Button */}
             <div>
               <button type="submit"
-              className='w-full bg-amber-300 px-8 py-3 rounded-lg my-4 hover:bg-amber-200' disabled={isLoading}>
-                {isLoading ? <LoadingSpinner sm/> : 'Sign Up'}
+              className='w-full bg-amber-300 px-8 py-3 rounded-lg my-4 hover:bg-amber-200'>
+                Sign Up
               </button>
             </div>
           </form>
@@ -213,10 +213,7 @@ export default function Register() {
             <p className='text-center my-4'>OR</p>
           </div>
           <div className='flex flex-row w-full justify-center text-center items-center gap-1'>
-            {/* <p className='font-light'>Login with </p>
-            <button onClick={continueWithGoogle} className='bg-white bg-transparent p-2 rounded'>      
-              <Image src={google} alt="google logo" width={80} height={90} />
-            </button> */}
+          
             <SocialButtons/>
           </div>
         </div>
