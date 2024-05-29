@@ -1,13 +1,7 @@
 'use client';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useGenerateSlideMutation } from '@/redux/features/authApiSlice';
+import React, { useState } from 'react';;
 import {Navbar, Footer, LoadingSpinner} from '@/components/common/'
 import Image from 'next/image';
-import sample1 from "../../../public/images/sample2.png";
-import sample2 from "../../../public/images/sample3.jpg";
-import sample3 from "../../../public/images/sample4.jpg";
-import sample4 from "../../../public/images/sample5.jpg";
 import { useGetAllBlogQuery } from '@/redux/features/authApiSlice';
 import Link from 'next/link';
 
@@ -18,6 +12,7 @@ import Link from 'next/link';
 export default function Blog() {
   const { data: blogs, isLoading } = useGetAllBlogQuery();
   const BASE_URL = 'http://localhost:8000';
+  const BASE_URL2 = 'https://zlide-backend-production.up.railway.app';
 
   // PAGINATION LOGIC
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,7 +61,7 @@ export default function Blog() {
                 <>
                   <div>
                     <div className='lg:h-[495px] lg:w-[607px]'>
-                      <Image src={`${BASE_URL}${blog.image}`} width={1000} height={1000} alt={blog.title} className='object-cover h-full w-full ' />
+                      <Image src={`${BASE_URL2}${blog.image}`} width={1000} height={1000} alt={blog.title} className='object-cover h-full w-full ' />
                     </div>
                     <div className='p-2'>
                       <p className='text-xs text-gray-300 py-2'>{blog.date_posted}</p>
@@ -86,7 +81,7 @@ export default function Blog() {
               <div key={index}>
                 <div className='lg:w-[639px] grid lg:grid-cols-2'>
                   <div className='lg:w-[292px] h-[226px]'>
-                    <Image src={`${BASE_URL}${blog.image}`} width={1000} height={1000} alt={blog.title} className='object-cover h-full w-full ' />
+                    <Image src={`${BASE_URL2}${blog.image}`} width={1000} height={1000} alt={blog.title} className='object-cover h-full w-full ' />
                   </div>
                   <div className='lg:w-[307px] md:h-[226px]'>
                     <p className='text-xs text-gray-300 py-2'>{blog.date_posted}</p>
@@ -119,7 +114,7 @@ export default function Blog() {
         <div key={index}>
           <div className='p-4 mb-6 h-[506px]'>
             <div className='w-[368px] h-[226px]'>
-              <Image src={`${BASE_URL}${blog.image}`} width={1000} height={1000} alt={blog.title} className='object-cover h-full w-full ' />
+              <Image src={`${BASE_URL2}${blog.image}`} width={1000} height={1000} alt={blog.title} className='object-cover h-full w-full ' />
             </div>
             <div className='w-[360px] h-[226px]'>
                 <p className='text-xs text-gray-300 py-2'>{blog.date_posted}</p>

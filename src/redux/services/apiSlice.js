@@ -7,8 +7,8 @@ import { Mutex } from 'async-mutex';
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  // baseUrl: 'https://zlide-backend-production.up.railway.app/api',
-  baseUrl: 'http://localhost:8000/api',
+  baseUrl: 'https://zlide-backend-production.up.railway.app/api',
+  // baseUrl: 'http://localhost:8000/api',
   credentials: 'include',
 });
 

@@ -14,6 +14,8 @@ const slug = pathname.split('/').pop();
 const { data: blog, isLoading, isError } = useGetSingleBlogQuery(slug);
 const BASE_URL = 'http://localhost:8000/';
 const blogUrl = `http://localhost:3000${pathname}`;
+const BASE_URL2 = 'https://zlide-backend-production.up.railway.app/api/';
+const blogUrl2 = `https://zlide-ben.vercel.app${pathname}`;
 
 
 // State to control the visibility of the error modal
@@ -55,7 +57,7 @@ return (
 <>
     <Navbar />
     <div>
-        <Image src={`${BASE_URL}${blog?.image}`} width={1000} height={1000} alt={blog?.title}
+        <Image src={`${BASE_URL2}${blog?.image}`} width={1000} height={1000} alt={blog?.title}
             className='object-cover h-full w-full ' />
     </div>
     <div className='my-8 mb-16 space-y-2 justify-center items-center flex flex-col max-w-7xl text-center mx-auto'>
@@ -69,14 +71,14 @@ return (
                 {part1}
             </p>
             <div>
-                <Image src={`${BASE_URL}${blog?.image2}`} width={1000} height={1000} alt={blog?.title}
+                <Image src={`${BASE_URL2}${blog?.image2}`} width={1000} height={1000} alt={blog?.title}
                     className='object-cover h-full w-full p-8 mb-8 ' />
             </div>
             <p className='leading-loose mb-16'>
                 {part2}
             </p>
             <div>
-                <Image src={`${BASE_URL}${blog?.image3}`} width={1000} height={1000} alt={blog?.title}
+                <Image src={`${BASE_URL2}${blog?.image3}`} width={1000} height={1000} alt={blog?.title}
                     className='object-cover h-full w-full p-8 mb-8' />
             </div>
             <p className='leading-loose mb-16'>
@@ -91,7 +93,7 @@ return (
             </Link>
         </div>
         <div>
-            <ShareButton url={blogUrl} title={blog?.title} />
+            <ShareButton url={blogUrl2} title={blog?.title} />
         </div>
     </div>
     {isLoading &&
