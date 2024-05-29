@@ -120,6 +120,15 @@ const authApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/testimonial/${id}`,
     }),
 
+    getAllBlog: builder.query({
+      query: () => '/blog/',
+    }),
+
+    getSingleBlog: builder.query({
+      query: (slug) => `/blog/${slug}/`,
+    }),
+
+
   }),
 });
 
@@ -141,4 +150,6 @@ export const {
   useDeleteSlideMutation,
   useGetAllTestimonialsQuery,
   useGetSingleTestimonialsQuery,
+  useGetAllBlogQuery,
+  useGetSingleBlogQuery,
 } = authApiSlice;

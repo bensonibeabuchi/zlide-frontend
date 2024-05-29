@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
+      domains: ['localhost'],
       remotePatterns: [
         {
           protocol: "https",
@@ -14,9 +15,22 @@ const nextConfig = {
           port: "",
           pathname: "/**",
         },
+        {
+          protocol: "http",
+          hostname: "localhost",
+          port: "",
+          pathname: "/**",
+        },
+        {
+          protocol: "https",
+          hostname: "zlide-backend-production.up.railway.app",
+          port: "",
+          pathname: "/**",
+        },
       ],
     },
   };
   
   export default nextConfig;
+
   

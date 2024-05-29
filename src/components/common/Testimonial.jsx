@@ -1,8 +1,7 @@
 import React from 'react';
 import { useGetAllTestimonialsQuery } from '@/redux/features/authApiSlice';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import { FaStar, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import { ImSpinner3 } from "react-icons/im";
+import { FaStar } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/autoplay'
 import { Autoplay } from 'swiper/modules'
@@ -44,23 +43,6 @@ export default function Testimonial() {
     </div>;
   }
 
-  // if (isError) {
-  //   return <div className='bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% md:p-16 p-6 items-center justify-center'>
-  //   <div className='text-center flex'>
-  //         <div className='text-white mx-auto items-center justify-center flex p-8 flex-col'>
-  //           <div className='flex'>
-  //             <FaStar size={10} className='text-[#FFD700]'/>
-  //             <FaStar size={10} className='text-[#FFD700]'/>
-  //             <FaStar size={10} className='text-[#FFD700]'/>
-  //             <FaStar size={10} className='text-[#FFD700]'/>
-  //             <FaStar size={10} className='text-[#e4e5e9]'/>
-  //           </div>
-  //           <p className='p-2 px-8 text-sm'>Network Error </p>
-  //           <p className='text-[#FFD045] font-bold text-sm'>Network Error</p>
-  //         </div>
-  //       </div>
-  // </div>;
-  // }
 
   return (
     <div className='bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% md:p-16 p-6 items-center justify-center'> 

@@ -29,8 +29,8 @@ export default function Dashboard() {
   const handleDeleteConfirm = async () => {
     if (!slideToDelete) return;
 
-    const url = `https://zlide-backend-production.up.railway.app/api/presentation/zlide/${slideToDelete.id}/`;
-    // const url = `http://localhost:8000/api/presentation/zlide/${slideToDelete.id}/`;
+    // const url = `https://zlide-backend-production.up.railway.app/api/presentation/zlide/${slideToDelete.id}/`;
+    const url = `http://localhost:8000/api/presentation/zlide/${slideToDelete.id}/`;
     try {
       await axios.delete(url, {
         headers: {

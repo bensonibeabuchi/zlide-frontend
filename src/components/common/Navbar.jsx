@@ -11,6 +11,10 @@ import { useVerify } from '../../hooks';
 import { FaBars } from "react-icons/fa";
 import { RiCloseLargeFill } from "react-icons/ri";
 import Link from 'next/link';
+import { FaAngleUp, FaAngleDown } from "react-icons/fa";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+
+
 
 
 
@@ -111,9 +115,47 @@ export default function Navbar() {
               </div>
             </div>
             <div className='flex gap-24 text-xl text-white'>
-              <p>Home</p>
-              <p>Support</p>
+              <Link href="/blog" className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 p-4 w-32 text-center rounded-md'>
+                <p>Blog</p>            
+              </Link>
+
+              {/* <p className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 p-4 w-32 text-center rounded-md'>Support</p> */}
+              <button onClick={toggleDropdown} className="flex hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 cursor-pointer lg:gap-4 text-center justify-center items-center w-40 rounded-md">
+                      Support {isDropdownOpen ? <IoIosArrowUp className="h-8 w-8 text-white transition-all cursor-pointer" /> : <IoIosArrowDown className="h-8 w-8 text-white cursor-pointer" />}
+              </button>
+              {/* Black background during dropdown menu */}
+              {isDropdownOpen && (
+                <div className="fixed inset-0 bg-black opacity-20" onClick={toggleDropdown}></div>
+              )}
+              {/* Dropdown menu */}
+              {isDropdownOpen && (
+                <div className="absolute mt-16 ml-56 w-[500px] p-8 py-8 bg-white border-gray-200 shadow-lg rounded-lg">
+                  <a href="/faq" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium  hover:transition-all">
+                    <p className="">FAQ</p>
+                  </a>
+                  <a href="/terms-of-service" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                    <p className="">Terms & Conditions</p>
+                  </a>
+              
+                  <a href="/privacy" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                    <p className="">Privacy Policy</p>
+                  </a>
+
+                  <a href="/about" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                    <p className="">About Us</p>
+                  </a>
+
+                  <a href="/contact" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                    <p className="">Contact Us</p>
+                  </a>
+
+                </div>
+              )}
+
+
+              <Link href="/pricing" className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 p-4 w-32 text-center rounded-md'>
               <p>Pricing</p>
+              </Link>
             </div>
             <div className='flex gap-4 items-center'>
               {isAuthenticated ? authLinks : guestLinks}
@@ -134,10 +176,55 @@ export default function Navbar() {
                   <div className="absolute right-2 w-full px-8 text-white py-4">
                     <div className="flex flex-col items-center text-center bg-white rounded-md shadow-md p-4 py-2 w-full">
               
-                      <a href="" className="block px-4 py-4 text-[#0A1F79] hover:bg-indigo-200 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Home</a>
-                      <a href="" className="block px-4 py-4 text-[#0A1F79] hover:bg-indigo-200 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Support</a>
-                      <a href="" className="block px-4 py-4 text-[#0A1F79] hover:bg-indigo-200 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Pricing</a>
-                      <p className='ml-40'>
+                      <Link href="/blog" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Blog</Link>
+                      
+                      {/* <button href="" className="block px-4 py-4 text-[#0A1F79] hover:bg-indigo-200 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Support</button> */}
+                     
+                     
+                     
+                      <button onClick={toggleDropdown} className="flex px-4 py-4  text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] items-center justify-end gap-2 font-semibold">
+                      Support {isDropdownOpen ? <IoIosArrowUp className="h-5 w-5 text-[#0A1F79] transition-all cursor-pointer" /> : <IoIosArrowDown className="h-5 w-5 text-[#0A1F79] cursor-pointer" />} 
+                      </button>
+                      {/* Black background during dropdown menu */}
+                      {isDropdownOpen && (
+                        <div className="fixed inset-0 bg-black opacity-20" onClick={toggleDropdown}></div>
+                      )}
+                      {/* Dropdown menu */}
+                      {isDropdownOpen && (
+                        <div className="absolute mt-32 w-3/4 ml-14 p-8 bg-white border-gray-200 shadow-lg rounded-lg">
+                          <a href="/faq" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all ">
+                            <p className="">FAQ</p>
+                          </a>
+                          <a href="/terms-of-service" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                            <p className="">Terms & Conditions</p>
+                          </a>
+                      
+                          <a href="/privacy" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                            <p className="">Privacy Policy</p>
+                          </a>
+
+                          <a href="/about" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                            <p className="">About Us</p>
+                          </a>
+
+                          <a href="/contact" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium hover:transition-all">
+                            <p className="">Contact Us</p>
+                          </a>
+
+                        </div>
+                      )}
+
+
+
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      <Link href="/pricing" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Pricing</Link>
+                      <p className='ml-28 p-2'>
                         {isAuthenticated ? authLinks : guestLinks}
                       </p>
                     </div>
