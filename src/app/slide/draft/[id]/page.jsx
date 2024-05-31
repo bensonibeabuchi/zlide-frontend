@@ -52,8 +52,8 @@ export default function DetailSlide() {
     const updatePresentation = async () => {
         setIsLoading(true); 
 
-        const url = `http://localhost:8000/api/presentation/zlide/${id}/`;
-        // const url = `https://zlide-backend-production.up.railway.app/api/presentation/zlide/${id}/`;
+        // const url = `http://localhost:8000/api/presentation/zlide/${id}/`;
+        const url = `https://zlide-backend-production.up.railway.app/api/presentation/zlide/${id}/`;
         const updatedData = {
             presentation_data: formData,
             presentation_name: presentationName

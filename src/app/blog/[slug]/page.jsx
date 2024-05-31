@@ -12,13 +12,8 @@ export default function DetailSlide() {
 const pathname = usePathname();
 const slug = pathname.split('/').pop();
 const { data: blog, isLoading, isError } = useGetSingleBlogQuery(slug);
-const BASE_URL = 'http://localhost:8000/';
 const blogUrl = `http://localhost:3000${pathname}`;
-const BASE_URL2 = 'https://zlide-backend-production.up.railway.app/api/';
 const blogUrl2 = `https://zlide-ben.vercel.app${pathname}`;
-
-
-// State to control the visibility of the error modal
 const [isModalVisible, setIsModalVisible] = useState(false);
 
 useEffect(() => {
@@ -53,15 +48,22 @@ return [part1, part2, part3];
 
 const [part1, part2, part3] = splitContent(blog?.content || '');
 
+  // DATE LOGIC
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+
+
 return (
 <>
     <Navbar />
     <div>
-        <Image src={`${BASE_URL2}${blog?.image}`} width={1000} height={1000} alt={blog?.title}
-            className='object-cover h-full w-full ' />
+        <Image src={blog?.image} width={1000} height={1000} alt={blog?.title} className='object-cover h-full w-full ' />
     </div>
     <div className='my-8 mb-16 space-y-2 justify-center items-center flex flex-col max-w-7xl text-center mx-auto'>
-        <p className='text-sm text-gray-300 py-2'>{blog?.date_posted}</p>
+        <p className='text-sm text-gray-300 py-2'>  {formatDate(blog.date_posted)}</p>
         <h1
             className='bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% inline-block text-transparent bg-clip-text font-bold text-4xl'>
             {blog?.title}</h1>
@@ -71,14 +73,14 @@ return (
                 {part1}
             </p>
             <div>
-                <Image src={`${BASE_URL2}${blog?.image2}`} width={1000} height={1000} alt={blog?.title}
+                <Image src={blog?.image2} width={1000} height={1000} alt={blog?.title}
                     className='object-cover h-full w-full p-8 mb-8 ' />
             </div>
             <p className='leading-loose mb-16'>
                 {part2}
             </p>
             <div>
-                <Image src={`${BASE_URL2}${blog?.image3}`} width={1000} height={1000} alt={blog?.title}
+                <Image src={blog?.image3} width={1000} height={1000} alt={blog?.title}
                     className='object-cover h-full w-full p-8 mb-8' />
             </div>
             <p className='leading-loose mb-16'>

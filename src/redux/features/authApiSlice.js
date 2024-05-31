@@ -128,6 +128,14 @@ const authApiSlice = apiSlice.injectEndpoints({
       query: (slug) => `/blog/${slug}/`,
     }),
 
+    contact: builder.mutation({
+      query: ({ name, email, message }) => ({
+        url: '/contact/',
+        method: 'POST',
+        body: { name, email, message },
+      }),
+    }),
+
 
   }),
 });
@@ -152,4 +160,5 @@ export const {
   useGetSingleTestimonialsQuery,
   useGetAllBlogQuery,
   useGetSingleBlogQuery,
+  useContactMutation,
 } = authApiSlice;

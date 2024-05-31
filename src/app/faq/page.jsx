@@ -4,6 +4,8 @@ import { useState } from 'react';
 import React from 'react'
 import { IoMdAddCircle } from "react-icons/io";
 import { FiMinusCircle } from "react-icons/fi";
+import { ContactModal, LoadingSpinner } from '@/components/common';
+
 
 
 
@@ -58,6 +60,44 @@ export default function Faq() {
         setOpenIndex(openIndex === index ? null : index);
       };
 
+    
+    const [isLoading, setIsLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      setIsLoading(true);
+      const formData = new FormData(event.target);
+
+      try {
+        const response = await fetch(event.target.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          setShowModal(true);
+        } else {
+          const errorData = await response.json();
+          setErrorMessage(`Form submission failed: ${errorData.message || 'Unknown error'}`);
+          console.error('Form submission failed:', errorData);
+        }
+      } catch (error) {
+        setErrorMessage(`Error submitting form: ${error.message}`);
+        console.error('Error submitting form', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const handleClose = () => {
+      setShowModal(false);
+    };
+
       
   return (
     <>
@@ -92,16 +132,50 @@ export default function Faq() {
         <p className='text-center text-lg max-w-3xl mx-auto'>
         If your question isn&apos;t answered above or in the rules then you can contact us using the form below. We will reply to all queries as soon as we can.
         </p>
-        <form action="" className='flex flex-col'>
+        <form onSubmit={handleSubmit} action="https://formspree.io/f/xnqeknln" method='POST' className='flex flex-col'>
             <label htmlFor="name" className='p-2'>Name:</label>
-            <input type="text" name="name" id="name" className='w-full bg-gray-200 p-4 rounded-md mb-8 mt-2' />
+            <input 
+              type="text" 
+              name="name" 
+              id="name" 
+              placeholder='Name' 
+              required
+              className='w-full bg-gray-200 p-4 rounded-md mb-8 mt-2' 
+            />
 
             <label htmlFor="email" className='p-2'>Email:</label>
-            <input type="email" name="email" id="email" className='w-full bg-gray-200 p-4 rounded-md mb-8 mt-2' />
+            <input 
+              type="email" 
+              name="email" 
+              id="email" 
+              placeholder='Enter email' 
+              required 
+              className='w-full bg-gray-200 p-4 rounded-md mb-8 mt-2' 
+            />
 
             <label htmlFor="textarea" className='p-2'>Your Question:</label>
-            <textarea name="textarea" id="textarea" className='w-full h-56 bg-gray-200 rounded-md'/>
-        </form>
+            <textarea 
+              name="message" 
+              id="message" 
+              placeholder='Message' 
+              required 
+              className='w-full h-56 bg-gray-200 rounded-md p-4' 
+            />
+
+            <div>
+              <button type="submit" className='w-full bg-amber-300 px-8 py-3 rounded-lg mt-8 hover:bg-amber-200'>
+                Send message
+              </button>
+            </div>
+          </form>
+
+        {isLoading && <LoadingSpinner />} 
+      {showModal && <ContactModal 
+      isOpen={showModal}
+      onClose={handleClose}
+       />}
+
+        
     </div>
 
     <Footer />

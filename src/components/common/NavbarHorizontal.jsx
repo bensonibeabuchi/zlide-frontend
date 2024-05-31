@@ -8,7 +8,7 @@ import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { logout as setLogout } from '@/redux/features/authSlice';
 import { useLogoutMutation } from '@/redux/features/authApiSlice';
 import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
-
+import { FaPowerOff } from "react-icons/fa6";
 
 
 export default function NavbarHorizontal() {
@@ -29,19 +29,6 @@ export default function NavbarHorizontal() {
             }
      });
 
-    //   // Save the sidebar state to localStorage whenever it changes
-    // useEffect(() => {
-    //     localStorage.setItem('isSidebarExpanded', isSidebarExpanded);
-    // }, [isSidebarExpanded]);
-
-    // const toggleSidebar = () => {
-    //     setIsSidebarExpanded(prevState => !prevState);
-    // };
-
-    // const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
-
-    
-    // Retrieve state from localStorage on component mount
     useEffect(() => {
         if (typeof window !== 'undefined') {
         const savedSidebarState = localStorage.getItem('isSidebarExpanded');
@@ -216,7 +203,7 @@ export default function NavbarHorizontal() {
                         <>
                         <p className='mb-4 bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] text-transparent bg-clip-text'>2 free {isSidebarExpanded && <span> zlides left</span>}</p> 
                          <div className='border-black border-t pt-4 w-3/4'>
-                            <button onClick={handleLogout} className='flex items-center gap-4 my-2 p-5 pl-6 rounded text-white bg-red-700 hover:bg-red-400 hover:text-white hover:transition-all hover:cursor-pointer'><HiArrowLeftStartOnRectangle size={25} />{isSidebarExpanded && <span>Logout</span>}
+                            <button onClick={handleLogout} className='flex items-center gap-4 my-2 p-5 pl-6 rounded text-white bg-red-700 hover:bg-red-400 hover:text-white hover:transition-all hover:cursor-pointer'><FaPowerOff size={25} />{isSidebarExpanded && <span>Logout</span>}
                             </button>
                         </div> 
 

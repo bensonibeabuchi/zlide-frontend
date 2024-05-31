@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['localhost'],
       remotePatterns: [
         {
           protocol: "https",
@@ -12,6 +11,18 @@ const nextConfig = {
         {
           protocol: "https",
           hostname: "plus.unsplash.com",
+          port: "",
+          pathname: "/**",
+        },
+        {
+          protocol: "https",
+          hostname: "bensonibeabuchibucket.s3.amazonaws.com",
+          port: "",
+          pathname: "/**",
+        },
+        {
+          protocol: "https",
+          hostname: "bensonibeabuchibucket.s3.eu-north-1.amazonaws.com",
           port: "",
           pathname: "/**",
         },

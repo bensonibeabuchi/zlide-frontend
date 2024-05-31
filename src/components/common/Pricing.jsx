@@ -17,7 +17,7 @@ export default function Pricing() {
             <p className='bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% inline-block text-transparent bg-clip-text text-4xl font-bold'>Flexible Pricing </p>
             <p className='w-2/6 text-center m-4'>
                 Take your presentations to the next level with our AI-powered web application
-                </p>
+            </p>
         <div className='gap-2 flex'>
             <button className='p-4 bg-black text-white rounded-md'>Monthly</button>
             <button className='p-4 border border-black rounded-md'>Yearly</button>
