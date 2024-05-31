@@ -1,12 +1,10 @@
 import { Footer, Navbar } from '@/components/common'
 import Image from 'next/image'
 import React from 'react'
-import sample3 from '../../../public/images/sample3.jpg'
 import benson from '../../../public/images/benson.jpeg'
 import temitope from '../../../public/images/temitope.jpg'
 import rahman from '../../../public/images/abdulrahman.jpg'
-import portrait from '../../../public/images/portrait.jpg'
-import titi from '../../../public/images/titi.jpg'
+
 
 export default function About() {
 return (
