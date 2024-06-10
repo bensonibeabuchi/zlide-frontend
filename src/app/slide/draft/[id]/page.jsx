@@ -133,9 +133,43 @@ export default function DetailSlide() {
                                     </div>
                                     <div className='grid grid-cols-4 mb-8'>
                                         <div className='col-span-3'>
-                                            {formData.map((slides, index) => (
+
+                                            {/* FIRST PAGE  */}
+                                        {formData.slice(0, 1).map((slides, index) => (
                                                 <div key={slides.id} className='grid h-[750px] p-4 my-8'>
-                                                    <div key={slides.id} className='grid bg-white shadow grid-cols-2 p-4'>
+                                                    <div key={slides.id} className='bg-cover bg-center' style={{ backgroundImage: `url(${slides.image_urls})` }}>
+                                                        <div key={slides.id} className='gap-2 flex flex-col justify-center items-center backdrop-blur w-full h-full bg-black bg-opacity-50'>
+                                                            <input
+                                                                type="text"
+                                                                key={slides.id}
+                                                                name="title"
+                                                                placeholder='Enter title'
+                                                                value={slides.title}
+                                                                onChange={(e) => handleSlideChange(index, e)}
+                                                                className='text-8xl font-black py-2 text-center bg-transparent text-white'
+                                                            />
+                                                            <textarea
+                                                                name="content"
+                                                                key={slides.id}
+                                                                placeholder='Enter content'
+                                                                value={slides.content}
+                                                                onChange={(e) => handleSlideChange(index, e)}
+                                                                className='h-64 w-[900px] font-semibold p-4 text-center bg-transparent text-white text-xl'
+                                                            />
+                                                        </div>
+                                                        {/* <div key={slides.id}>
+                                                            {slides.image_urls && slides.image_urls.map((url, i) => (
+                                                                <input type="image" key={slides.id} name="image" src={url} alt="" className='w-full p-4 object-contain h-[700px]' />
+                                                            ))}
+                                                        </div> */}
+                                                    </div>
+                                                </div>
+                                            ))}
+
+                                            {/* REST OF PAGE  */}
+                                            {formData.slice(1).map((slides, index) => (
+                                                <div key={slides.id} className='grid h-[750px] p-4 my-8'>
+                                                    <div key={slides.id} className='grid bg-white shadow grid-cols-2 p-4 bg-cover bg-center'>
                                                         <div key={slides.id} className='justify-center p-4 gap-2 flex flex-col text-start'>
                                                             <input
                                                                 type="text"

@@ -103,20 +103,20 @@ export default function Dashboard() {
             </div>
             {/* Displaying slides */}
               { slides ? (
-                <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mb-8'>
+                <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 my-8'>
                   {slide.slice(0,6).map((slide, index) => (
                     <div key={index}>
-                      <Link href={`/slide/draft/${slide.id}`}>
-                          <div className='bg-white rounded-xl grid lg:grid-cols-2 grid-col-1 p-4 my-2 h-[250px]'>
-                            <div className='justify-center p-4 flex flex-col text-start'>
-                              <p className='text-sm font-semibold py-2'>{slide.presentation_data[0]?.title}</p>
-                              <p className='text-xs overflow-hidden text-ellipsis h-24'>{slide.presentation_data[0]?.content}</p>
+                      <Link href={`/slide/draft/${slide.id}`} >
+                          <div className='rounded-xl flex items-center justify-center my-2 h-[350px] bg-cover bg-center hover:scale-[1.02] transition-all hover:transition-all'  style={{ backgroundImage: `url(${slide.presentation_data[0]?.image_urls})`, borderRadius: '1rem' }}>
+                            <div className='justify-center rounded-xl flex flex-col text-start bg-black bg-opacity-60 backdrop-blur-sm w-full h-full'>
+                              <p className='text-6xl font-semibold py-2 text-center text-white '>{slide.presentation_data[0]?.title}</p>
+                              <p className='text-sm px-16 text-center font-semibold text-white overflow-hidden text-ellipsis h-24'>{slide.presentation_data[0]?.content}</p>
                             </div>
-                            <div>
+                            {/* <div>
                               {slide.presentation_data[0]?.image_urls && slide.presentation_data[0].image_urls.map((url, i) => (
                                 <Image key={i} src={url} alt={`Slide ${index + 1} Image ${i + 1}`} width={1000} height={1000} className='w-full p-4 object-cover h-[226px]' priority />
                               ))}
-                            </div>
+                            </div> */}
                           </div>
                       </Link>
                           <div className='flex justify-between px-8 items-center p-2'>
