@@ -40,15 +40,15 @@ export default function Landing() {
       <p className='text-white md:text-8xl text-4xl font-bold'>Effortless Creation</p>
       <p className='text-white md:text-8xl text-4xl font-bold'>Limitless Possibilities</p>
       <p className='text-white md:text-lg text-sm text-center mt-4 px-8'>Create an impressive slide deck in minutes by just typing a sentence. No special design skills needed.</p>
-        <form onSubmit={handleSubmit} className='flex flex-col items-center space-y-2 mt-8 bg-gray-100 p-4 rounded-lg md:w-[600px] w-[400px] shadow-2xl'>
+        <form onSubmit={handleSubmit} className='flex flex-col items-center space-y-2 mt-8 bg-gray-100 p-4 rounded-lg md:w-[600px] w-[300px] shadow-2xl'>
             <textarea
             name="presentationName"
             id="presentationName"
             value={presentationName}
             onChange={handleChange}
             placeholder='What presentation do you want to create? For example: An ecommerce fashion brand that specializes in silk dresses.'
-            className='w-full h-24 rounded-md p-4 border'/>
-          <button type="submit" className='bg-[#FFD045] p-4 rounded-md w-full text-[#1f1073] font-semibold'>Try for free</button>
+            className='w-full h-24 rounded-md p-4 border text-xs md:text-base'/>
+          <button type="submit" className='bg-[#FFD045] p-4 text-xs md:text-base rounded-md w-full text-[#1f1073] font-semibold'>Try for free</button>
         </form>
     </div>
     {/* HOW TO USE THE WEBSITE  */}

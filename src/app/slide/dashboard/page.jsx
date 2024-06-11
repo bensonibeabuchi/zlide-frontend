@@ -147,7 +147,7 @@ export default function Dashboard() {
              }
 
                {/* Pagination controls */}
-               <div className='md:p-4 flex text-center items-center justify-center md:gap-8 mb-8'>
+               <div className='md:p-4 flex text-center items-center justify-center md:gap-8 mb-32'>
                     <button onClick={handlePrevPage} disabled={currentPage === 1} className='bg-[#FFD045] text-[#0A1F79] md:px-4 px-2 py-2 rounded ' >Previous</button>
                     <span className='md:text-base text-xs m-2'>Page {currentPage} of {totalPages}</span>
                     <button onClick={handleNextPage} disabled={currentPage === totalPages} className='bg-[#FFD045] text-[#0A1F79] md:px-4 px-2 py-2 rounded' >Next</button>

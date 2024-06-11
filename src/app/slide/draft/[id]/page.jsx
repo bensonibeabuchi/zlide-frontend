@@ -117,9 +117,9 @@ export default function DetailSlide() {
                         <NavbarHorizontal />
                     </div>
                     <div className='h-screen overflow-auto'>
-                        <div className=' p-4 pr-16 mt-16 gap-24'>
+                        <div className='md:p-4 md:pr-16 mt-16 gap-24'>
                             <div className='w-full col-span-3'>
-                                <h1 className='text-4xl px-8 font-semibold bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text mb-8'>Edit Slide</h1>
+                                <h1 className='md:text-4xl text-xl px-8 font-semibold bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text md:mb-8 mb-2'>Edit Slide</h1>
                                 <form onSubmit={handleUpdatePresentation}>
                                     <div className='flex flex-col px-4'>
                                         <label htmlFor="presentation_name:">Presentation Name:</label>
@@ -129,7 +129,7 @@ export default function DetailSlide() {
                                             id="presentation_name"
                                             value={presentationName}
                                             onChange={handleNameChange}
-                                            className='text-2xl font-semibold rounded-md p-4 md:w-96' />
+                                            className='md:text-2xl font-semibold rounded-md p-4 md:w-96' />
                                     </div>
                                     <div className='grid md:grid-cols-4 grid-cols-1 mb-8'>
                                         
@@ -144,7 +144,7 @@ export default function DetailSlide() {
 
                                             {/* FIRST PAGE  */}
                                         {formData.slice(0, 1).map((slides, index) => (
-                                                <div key={slides.id} className="grid h-[750px] p-4 my-8">
+                                                <div key={slides.id} className="grid md:h-[750px] p-4 md:my-8">
                                                 <div
                                                     key={slides.id}
                                                     className="bg-cover bg-center w-full h-full rounded-xl"
@@ -157,14 +157,14 @@ export default function DetailSlide() {
                                                         placeholder="Enter title"
                                                         value={slides.title}
                                                         onChange={(e) => handleSlideChange(index, e)}
-                                                        className="lg:text-8xl md:text-6xl text-4xl font-black py-2 text-center bg-transparent text-white w-full"
+                                                        className="lg:text-8xl md:text-6xl text-2xl font-black py-2 text-center bg-transparent text-white w-full"
                                                     />
                                                     <textarea
                                                         name="content"
                                                         placeholder="Enter content"
                                                         value={slides.content}
                                                         onChange={(e) => handleSlideChange(index, e)}
-                                                        className="h-64 w-full font-semibold md:p-4 text-center bg-transparent text-white text-xl mt-4"
+                                                        className="md:h-64 h-32 w-full md:font-semibold md:p-4 text-center bg-transparent text-white md:text-xl text-xs mt-4"
                                                     />
                                                     </div>
                                                 </div>
@@ -173,9 +173,9 @@ export default function DetailSlide() {
 
                                             {/* REST OF PAGE  */}
                                             {formData.slice(1).map((slides, index) => (
-                                                <div key={slides.id} className='grid h-[750px] p-4 my-8'>
-                                                    <div key={slides.id} className='grid bg-white shadow grid-cols-2 p-4 bg-cover bg-center'>
-                                                        <div key={slides.id} className='justify-center p-4 gap-2 flex flex-col text-start'>
+                                                <div key={slides.id} className='grid md:h-[750px] p-4 md:my-8'>
+                                                    <div key={slides.id} className='grid bg-white shadow grid-cols-2 md:p-4 p-1 bg-cover bg-center items-center'>
+                                                        <div key={slides.id} className='justify-center md:p-4 p-2 md:gap-2 flex flex-col text-start'>
                                                             <input
                                                                 type="text"
                                                                 key={slides.id}
@@ -183,7 +183,7 @@ export default function DetailSlide() {
                                                                 placeholder='Enter title'
                                                                 value={slides.title}
                                                                 onChange={(e) => handleSlideChange(index, e)}
-                                                                className='text-3xl font-bold py-2'
+                                                                className='md:text-3xl text-sm font-bold py-2'
                                                             />
                                                             <textarea
                                                                 name="content"
@@ -191,12 +191,12 @@ export default function DetailSlide() {
                                                                 placeholder='Enter content'
                                                                 value={slides.content}
                                                                 onChange={(e) => handleSlideChange(index, e)}
-                                                                className='h-64'
+                                                                className='md:h-64 h-32 text-[8px]'
                                                             />
                                                         </div>
                                                         <div key={slides.id}>
                                                             {slides.image_urls && slides.image_urls.map((url, i) => (
-                                                                <input type="image" key={slides.id} name="image" src={url} alt="" className='w-full p-4 object-contain h-[700px]' />
+                                                                <input type="image" key={slides.id} name="image" src={url} alt="" className='w-full md:p-4 object-contain md:h-[700px]' />
                                                             ))}
                                                         </div>
                                                     </div>
@@ -204,9 +204,9 @@ export default function DetailSlide() {
                                             ))}
                                         </div>
                                         <div className='md:col-span-1 m-4'>
-                                            <div className='lg:p-8 sm:p-4 space-y-4 bg-white shadow-lg sticky top-52 rounded-lg' >
+                                            <div className='lg:p-8 p-2 space-y-4 bg-white shadow-lg sticky top-52 rounded-lg' >
                                                 <button type="submit" className='bg-[#FFD045] p-4 rounded-md w-full'>Save</button>
-                                                <button type="button" onClick={handleDownloadPPT} className='bg-[#FFD045] p-4 rounded-md w-full items-center flex gap-4 justify-center flex-wrap text-wrap overflow-hidden'>Download as Powerpoint <PiMicrosoftPowerpointLogoFill size={25} /> </button>
+                                                <button type="button" onClick={handleDownloadPPT} className='bg-[#FFD045] md:p-4 p-2 rounded-md w-full items-center flex md:gap-4 justify-center flex-wrap overflow-hidden'>Download as Powerpoint <PiMicrosoftPowerpointLogoFill size={25} /> </button>
                                             </div>
                                         </div>
                                     </div>

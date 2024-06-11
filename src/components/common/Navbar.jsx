@@ -11,7 +11,6 @@ import { useVerify } from '../../hooks';
 import { FaBars } from "react-icons/fa";
 import { RiCloseLargeFill } from "react-icons/ri";
 import Link from 'next/link';
-import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 
@@ -50,15 +49,15 @@ export default function Navbar() {
       <div className='text-indigo-500 bg-[#fcdc66] items-center text-center text-2xl font-semibold w-14 h-14  justify-center flex rounded-full'>
         <Link href="/slide/dashboard"> {initials} </Link>
       </div>
-      <button className='text-white bg-red-500 hover:bg-red-300 py-2 px-4 rounded w-32'>
+      <button className='text-white bg-red-500 hover:bg-red-300 py-2 px-4 rounded lg:w-32 w-16'>
         <p onClick={handleLogout}>Logout</p>
       </button>
     </div>
   )
   const guestLinks = (
-    <div className='space-x-4 flex justify-end px-8 w-full'>
-      <button className="py-4 px-8 bg-white text-black rounded w-32"><a href="/login">LogIn</a></button>
-      <button className="py-4 px-8 bg-[#FFD045] rounded w-32"><a href="/register">SignUp</a></button>
+    <div className='md:space-x-4 flex md:px-8 w-full'>
+      <button className="py-4 lg:px-8 px-2 bg-white rounded lg:w-32 w-16"><a href="/login">Login</a></button>
+      <button className="py-4 lg:px-8 px-2 bg-[#FFD045] rounded lg:w-32 w-16"><a href="/register">Signup</a></button>
   </div>
   )
 
@@ -104,32 +103,32 @@ export default function Navbar() {
   }, []);
   
   return (
-    <nav ref={navRef} className= {`${scrolling ? 'sticky z-50 top-0 p-4 w-full bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90%' : 'p-4 w-full bg-transparent absolute top-0'}`}>
+    <nav ref={navRef} className= {`${scrolling ? 'sticky z-50 top-0 lg:p-4 w-full bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90%' : 'lg:p-4 p-2 w-full bg-transparent absolute top-0'}`}>
         <div className='hidden md:block'>
-          <div className='flex items-center justify-between p-2 px-32 mx-auto max-w-[1920px]'>
-            <div className="flex items-center md:p-8">
-              <div className='flex-shrink-0 ml-4'>
+          <div className='flex items-center justify-center p-4 overflow-hidden lg:px-32 md:px-8 px-4 mx-auto max-w-[1920px]'>
+            <div className="flex-shrink-0 items-center lg:p-8 p-4  overflow-hidden">
+              <div className='flex-shrink-0'>
                 <a href="/">
-                  <Image src="/images/zlide-logo.png" height={100} width={100} alt="Zlide logo" className="cursor-pointer" />
+                  <Image src="/images/zlide-logo.png" height={200} width={100} alt="Zlide logo" className="cursor-pointer" />
                 </a>
               </div>
             </div>
-            <div className='flex gap-24 text-xl text-white'>
-              <Link href="/blog" className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 p-4 w-32 text-center rounded-md'>
+            <div className='flex justify-center items-center lg:text-xl text-base text-white lg:w-full w-1/4'>
+              <Link href="/blog" className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 lg:p-4 lg:w-32 text-center rounded-md'>
                 <p>Blog</p>            
               </Link>
 
-              {/* <p className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 p-4 w-32 text-center rounded-md'>Support</p> */}
-              <button onClick={toggleDropdown} className="flex hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 cursor-pointer lg:gap-4 text-center justify-center items-center w-40 rounded-md">
-                      Support {isDropdownOpen ? <IoIosArrowUp className="h-8 w-8 text-white transition-all cursor-pointer" /> : <IoIosArrowDown className="h-8 w-8 text-white cursor-pointer" />}
+
+              <button onClick={toggleDropdown} className="flex hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 p-4 cursor-pointer lg:gap-4 text-center justify-center items-center w-40 rounded-md">
+                      Support {isDropdownOpen ? <IoIosArrowUp className="lg:h-8 lg:w-8 text-white transition-all cursor-pointer" /> : <IoIosArrowDown className="lg:h-8 lg:w-8 text-white cursor-pointer" />}
               </button>
               {/* Black background during dropdown menu */}
               {isDropdownOpen && (
-                <div className="fixed inset-0 bg-black opacity-20" onClick={toggleDropdown}></div>
+                <div className="fixed inset-0 bg-black opacity-20 " onClick={toggleDropdown}></div>
               )}
               {/* Dropdown menu */}
               {isDropdownOpen && (
-                <div className="absolute mt-16 ml-56 w-[500px] p-8 py-8 bg-white border-gray-200 shadow-lg rounded-lg">
+                <div className="absolute top-28 ml-40 p-8 py-8 bg-white border-gray-200 shadow-lg rounded-lg">
                   <a href="/faq" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 font-medium  hover:transition-all">
                     <p className="">FAQ</p>
                   </a>
@@ -153,10 +152,11 @@ export default function Navbar() {
               )}
 
 
-              <Link href="/pricing" className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 p-4 w-32 text-center rounded-md'>
+              <Link href="/pricing" className='hover:bg-[#FFD045] hover:text-[#1f1073] hover:scale-105 lg:p-4 lg:w-32 text-center rounded-md'>
               <p>Pricing</p>
               </Link>
             </div>
+
             <div className='flex gap-4 items-center'>
               {isAuthenticated ? authLinks : guestLinks}
             </div>

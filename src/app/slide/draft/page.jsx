@@ -47,9 +47,9 @@ export default function Zlide() {
             <NavbarHorizontal />
           </div>
           <div className='h-screen overflow-auto'>
-            <div className='text-center p-4 pr-16 mt-16 right-0 absolute w-[700px]'>
+            <div className='text-center md:p-4 md:pr-16 pr-2 mt-16 md:right-0 absolute md:w-[700px]'>
               <form onSubmit={handleSubmit} className='p-8 space-y-4 bg-white shadow-lg sticky top-40 rounded-lg'>
-                <label htmlFor="presentation" className='text-[#1F1053] text-xl font-medium'>
+                <label htmlFor="presentation" className='text-[#1F1053] md:text-xl font-medium'>
                   What presentation do you want to create?
                 </label>
                 <textarea
@@ -60,7 +60,7 @@ export default function Zlide() {
                   onChange={handleChange}
                   className='p-4 h-32 w-full justify-start text-start rounded-md border-gray-300 border-2'
                 />
-                <button type="submit" className='bg-[#FFD045] py-4 px-8 w-full rounded-md text-[#1F1053] font-medium'>
+                <button type="submit" className='bg-[#FFD045] py-4 md:px-8 w-full rounded-md text-[#1F1053] font-medium'>
                   Start Generating
                 </button>
               </form>

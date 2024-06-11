@@ -7,9 +7,6 @@ import { FiMinusCircle } from "react-icons/fi";
 import { ContactModal, LoadingSpinner } from '@/components/common';
 
 
-
-
-
 export default function Faq() {
     const faqs = [
         {
@@ -102,9 +99,9 @@ export default function Faq() {
   return (
     <>
     <Navbar/>
-    <div className='bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% text-center items-center md:pt-64 pt-40 pb-32 px-8 md:gap-8 flex flex-col mx-auto md:h-[560px]'>
+    <div className='bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% text-center items-center md:pt-64 pt-40 pb-32 px-8 lg:gap-8 flex flex-col mx-auto lg:h-[560px]'>
       <p className='text-white md:text-8xl text-3xl font-bold'>Frequently Asked Questions </p>
-      <p className='text-white md:text-lg text-sm text-center mt-4 px-8'>Got questions? We are more than happy to assist you 😉</p>
+      <p className='text-white md:text-lg text-sm text-center lg:mt-4 px-8'>Got questions? We are more than happy to assist you 😉</p>
     </div>
 
     <div className='max-w-7xl mx-auto items-center justify-center p-16 my-8 mb-16'>

@@ -108,11 +108,11 @@ export default function NavbarHorizontal() {
 
 
     return (
-        <div className="h-screen sticky z-30 mr-8">
+        <div className="h-screen sticky z-30 md:mr-8 mr-4">
             <nav className='text-black text-lg'>
-                <div className='h-screen justify-between  flex flex-col shadow-lg bg-white overflow-hidden py-16 px-8'>
-                <button onClick={toggleSidebar} className='absolute right-0'>
-                    {isSidebarExpanded ? <HiChevronLeft size={30} className='text-[#1F1053] items-center justify-center h-screen pb-40 transition-all '/> : <HiChevronRight size={30} className='text-red-500 items-center justify-center h-screen pb-40 transition-all '/> }
+                <div className='h-screen justify-between flex flex-col shadow-lg bg-white overflow-hidden md:py-16 py-8 md:px-8 px-1'>
+                <button onClick={toggleSidebar} className='absolute right-0 '>
+                    {isSidebarExpanded ? <HiChevronLeft size={30} className='text-[#1F1053] items-center justify-center h-screen pb-[147px] transition-all '/> : <HiChevronRight size={30} className='items-center justify-center h-screen pb-[147px] transition-all '/> }
                 </button>
                    
                     <div className='gap-12 flex flex-col'>

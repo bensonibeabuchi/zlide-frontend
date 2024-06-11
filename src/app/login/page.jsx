@@ -14,57 +14,56 @@ import { continueWithGoogle } from '@/utils';
 import logo from '../../../public/images/zlide-logohead-black.png'
 
 export default function SignUp() {
-const [login, { isLoading }] = useLoginMutation();
-const [error, setError] = useState('');
-const [showPassword, setShowPassword] = useState(false);
-const [isEyeOn, setisEyeOn] = useState(false);
-const [showModal, setShowModal] = useState(false);
-const router = useRouter();
-const dispatch = useAppDispatch();
+    const [login, { isLoading }] = useLoginMutation();
+    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [isEyeOn, setisEyeOn] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const router = useRouter();
+    const dispatch = useAppDispatch();
 
-const toggleEyeOn = () => { setisEyeOn(!isEyeOn);};
+    const toggleEyeOn = () => { setisEyeOn(!isEyeOn);};
 
-const toggleShowPassword = () => { setShowPassword(!showPassword);};
+    const toggleShowPassword = () => { setShowPassword(!showPassword);};
 
-const toggleError = () => { setError(null);}
+    const toggleError = () => { setError(null);}
 
-const [formData, setFormData] = useState({
-email: '',
-password: '',
-});
+    const [formData, setFormData] = useState({
+      email: '',
+      password: '',
+      });
 
-const { email, password,} = formData
+    const { email, password,} = formData
 
-const onChange = (event) => {
-const { name, value } = event.target;
-setFormData({ ...formData, [name]: value})
-};
+    const onChange = (event) => {
+      const { name, value } = event.target;
+      setFormData({ ...formData, [name]: value})
+      };
 
-const onSubmit = (event) => {
-event.preventDefault();
-
-login({ email, password, })
-.unwrap()
-.then(() => {
-dispatch(setAuth());
-toast.success(' Logged in successfully')
-setError(null);
-router.push('/slide/dashboard')
-})
-.catch((error) => {
-console.error(error.data)
-// toast.error('Email or Password is incorrect')
-setError('Email or Password is incorrect')
-});
-};
+    const onSubmit = (event) => {
+      event.preventDefault();
+      login({ email, password, })
+      .unwrap()
+      .then(() => {
+      dispatch(setAuth());
+      toast.success(' Logged in successfully')
+      setError(null);
+      router.push('/slide/dashboard')
+      })
+      .catch((error) => {
+      console.error(error.data)
+      // toast.error('Email or Password is incorrect')
+      setError('Email or Password is incorrect')
+      });
+      };
 
 return (
 <>
   <Link href="/">
-  <Image src={logo} width={50} height={70} alt='logo' className=' absolute left-2/4 justify-center mt-8' />
+  <Image src={logo} width={50} height={70} alt='logo' className=' relative left-2/4 justify-center mt-8' />
   </Link>
   <div className='flex flex-col h-screen mx-auto justify-center items-center'>
-    <div className='bg-[#F8F8F6] w-[650px] rounded-lg p-12 '>
+    <div className='bg-[#F8F8F6] md:w-[650px] rounded-lg p-12 '>
       <h1
         className='font-semibold text-4xl bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text '>
         Login</h1>
@@ -84,9 +83,9 @@ return (
           <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
 
           <button type='button' onClick={toggleEyeOn}> {isEyeOn ?
-            <IoMdEye className='absolute left-[480px] top-[50px] hover:cursor-pointer' size={18}
+            <IoMdEye className='absolute md:left-[480px] left-[180px] top-[50px] hover:cursor-pointer' size={18}
               onClick={toggleShowPassword} /> :
-            <IoMdEyeOff className='absolute left-[480px] top-[50px] hover:cursor-pointer' size={18}
+            <IoMdEyeOff className='absolute md:left-[480px] left-[180px] top-[50px] hover:cursor-pointer' size={18}
               onClick={toggleShowPassword} />} </button>
 
           <input type={showPassword ? 'text' : 'password' } name="password" id="password" placeholder='Enter Password'

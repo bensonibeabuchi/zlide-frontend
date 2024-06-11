@@ -89,20 +89,15 @@ export default function Footer() {
           </div>
 
         </div>
-        <div className='text-white border-t p-4 px-24 flex flex-col mt-16 justify-center gap-8 items-center'>
+        <div className='text-white border-t p-4 lg:px-24 flex flex-col mt-16 justify-center gap-8 items-center'>
           <div>
-            <p className='flex items-center gap-2'>
+            <p className='flex md:flex-row flex-col text-center items-center gap-2 md:text-base text-xs'>
               <FaRegCopyright/> 2024 Zlide. All rights Reserved
             </p>
           </div>
           <div>
-            <ul className='flex gap-4'>
-            <ShareButton url={blogUrl2} title={pathname} />
-              {/* <li><FaFacebook size={25}/> </li>
-              <li><FaInstagram size={25}/> </li>
-              <li><FaLinkedin size={25}/> </li>
-              <li><FaTwitter size={25}/> </li>
-              <li><FaYoutube size={25}/> </li> */}
+            <ul className='flex gap-4 '>
+              <ShareButton url={blogUrl2} title={pathname} />
             </ul>
 
           </div>
