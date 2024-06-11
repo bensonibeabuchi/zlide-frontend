@@ -109,7 +109,7 @@ export default function Dashboard() {
                       <Link href={`/slide/draft/${slide.id}`} >
                           <div className='rounded-xl flex items-center justify-center my-2 h-[350px] bg-cover bg-center hover:scale-[1.02] transition-all hover:transition-all'  style={{ backgroundImage: `url(${slide.presentation_data[0]?.image_urls})`, borderRadius: '1rem' }}>
                             <div className='justify-center rounded-xl flex flex-col text-start bg-black bg-opacity-60 backdrop-blur-sm w-full h-full'>
-                              <p className='text-6xl font-semibold py-2 text-center text-white '>{slide.presentation_data[0]?.title}</p>
+                              <p className='md:text-6xl text-3xl font-semibold py-2 text-center text-white truncate '>{slide.presentation_data[0]?.title}</p>
                               <p className='text-sm px-16 text-center font-semibold text-white overflow-hidden text-ellipsis h-24'>{slide.presentation_data[0]?.content}</p>
                             </div>
                             {/* <div>
@@ -147,10 +147,10 @@ export default function Dashboard() {
              }
 
                {/* Pagination controls */}
-               <div className='p-4 flex text-center items-center justify-center gap-8 mb-8'>
-                    <button onClick={handlePrevPage} disabled={currentPage === 1} className='bg-[#FFD045] text-[#0A1F79] px-4 py-2 rounded ' >Previous</button>
-                    <span>Page {currentPage} of {totalPages}</span>
-                    <button onClick={handleNextPage} disabled={currentPage === totalPages} className='bg-[#FFD045] text-[#0A1F79] px-4 py-2 rounded' >Next</button>
+               <div className='md:p-4 flex text-center items-center justify-center md:gap-8 mb-8'>
+                    <button onClick={handlePrevPage} disabled={currentPage === 1} className='bg-[#FFD045] text-[#0A1F79] md:px-4 px-2 py-2 rounded ' >Previous</button>
+                    <span className='md:text-base text-xs m-2'>Page {currentPage} of {totalPages}</span>
+                    <button onClick={handleNextPage} disabled={currentPage === totalPages} className='bg-[#FFD045] text-[#0A1F79] md:px-4 px-2 py-2 rounded' >Next</button>
                 </div>
                 <DeleteModal
                   isOpen={isDeleteModalOpen}

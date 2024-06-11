@@ -129,40 +129,45 @@ export default function DetailSlide() {
                                             id="presentation_name"
                                             value={presentationName}
                                             onChange={handleNameChange}
-                                            className='text-2xl font-semibold rounded-md p-4 w-96' />
+                                            className='text-2xl font-semibold rounded-md p-4 md:w-96' />
                                     </div>
-                                    <div className='grid grid-cols-4 mb-8'>
-                                        <div className='col-span-3'>
+                                    <div className='grid md:grid-cols-4 grid-cols-1 mb-8'>
+                                        
+                                    <div className='md:col-span-1 md:hidden m-4'>
+                                            <div className='p-8 space-y-4 bg-white shadow-lg sticky top-52 rounded-lg' >
+                                                <button type="submit" className='bg-[#FFD045] p-4 rounded-md w-full'>Save</button>
+                                                <button type="button" onClick={handleDownloadPPT} className='bg-[#FFD045] p-4 rounded-md w-full items-center flex gap-4 justify-center'>Download as Powerpoint <PiMicrosoftPowerpointLogoFill size={25} /> </button>
+                                            </div>
+                                        </div>
+
+                                        <div className='md:col-span-3'>
 
                                             {/* FIRST PAGE  */}
                                         {formData.slice(0, 1).map((slides, index) => (
-                                                <div key={slides.id} className='grid h-[750px] p-4 my-8'>
-                                                    <div key={slides.id} className='bg-cover bg-center' style={{ backgroundImage: `url(${slides.image_urls})` }}>
-                                                        <div key={slides.id} className='gap-2 flex flex-col justify-center items-center backdrop-blur w-full h-full bg-black bg-opacity-50'>
-                                                            <input
-                                                                type="text"
-                                                                key={slides.id}
-                                                                name="title"
-                                                                placeholder='Enter title'
-                                                                value={slides.title}
-                                                                onChange={(e) => handleSlideChange(index, e)}
-                                                                className='text-8xl font-black py-2 text-center bg-transparent text-white'
-                                                            />
-                                                            <textarea
-                                                                name="content"
-                                                                key={slides.id}
-                                                                placeholder='Enter content'
-                                                                value={slides.content}
-                                                                onChange={(e) => handleSlideChange(index, e)}
-                                                                className='h-64 w-[900px] font-semibold p-4 text-center bg-transparent text-white text-xl'
-                                                            />
-                                                        </div>
-                                                        {/* <div key={slides.id}>
-                                                            {slides.image_urls && slides.image_urls.map((url, i) => (
-                                                                <input type="image" key={slides.id} name="image" src={url} alt="" className='w-full p-4 object-contain h-[700px]' />
-                                                            ))}
-                                                        </div> */}
+                                                <div key={slides.id} className="grid h-[750px] p-4 my-8">
+                                                <div
+                                                    key={slides.id}
+                                                    className="bg-cover bg-center w-full h-full rounded-xl"
+                                                    style={{ backgroundImage: `url(${slides.image_urls})` }}
+                                                >
+                                                    <div className="flex flex-col justify-center items-center backdrop-blur bg-black bg-opacity-50 h-full p-4">
+                                                    <input
+                                                        type="text"
+                                                        name="title"
+                                                        placeholder="Enter title"
+                                                        value={slides.title}
+                                                        onChange={(e) => handleSlideChange(index, e)}
+                                                        className="lg:text-8xl md:text-6xl text-4xl font-black py-2 text-center bg-transparent text-white w-full"
+                                                    />
+                                                    <textarea
+                                                        name="content"
+                                                        placeholder="Enter content"
+                                                        value={slides.content}
+                                                        onChange={(e) => handleSlideChange(index, e)}
+                                                        className="h-64 w-full font-semibold md:p-4 text-center bg-transparent text-white text-xl mt-4"
+                                                    />
                                                     </div>
+                                                </div>
                                                 </div>
                                             ))}
 
@@ -198,10 +203,10 @@ export default function DetailSlide() {
                                                 </div>
                                             ))}
                                         </div>
-                                        <div className='col-span-1'>
-                                            <div className='p-8 space-y-4 bg-white shadow-lg sticky top-52 rounded-lg' >
+                                        <div className='md:col-span-1 m-4'>
+                                            <div className='lg:p-8 sm:p-4 space-y-4 bg-white shadow-lg sticky top-52 rounded-lg' >
                                                 <button type="submit" className='bg-[#FFD045] p-4 rounded-md w-full'>Save</button>
-                                                <button type="button" onClick={handleDownloadPPT} className='bg-[#FFD045] p-4 rounded-md w-full items-center flex gap-4 justify-center'>Download as Powerpoint <PiMicrosoftPowerpointLogoFill size={25} /> </button>
+                                                <button type="button" onClick={handleDownloadPPT} className='bg-[#FFD045] p-4 rounded-md w-full items-center flex gap-4 justify-center flex-wrap text-wrap overflow-hidden'>Download as Powerpoint <PiMicrosoftPowerpointLogoFill size={25} /> </button>
                                             </div>
                                         </div>
                                     </div>
