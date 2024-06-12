@@ -94,8 +94,8 @@ export default function Navbar() {
     </div>
   )
   const guestLinks = (
-    <div className='md:space-x-4 flex md:px-8 w-full'>
-      <button className="py-4 lg:px-8 px-2 bg-white rounded lg:w-32 w-16"><a href="/login">Login</a></button>
+    <div className='md:space-x-4 flex md:px-8 px-1 gap-2 w-full bg-red-500'>
+      <button className="py-4 lg:px-8 px-2 bg-white rounded border text-[#1f1073] lg:w-32 w-16"><a href="/login">Login</a></button>
       <button className="py-4 lg:px-8 px-2 bg-[#FFD045] rounded lg:w-32 w-16"><a href="/register">Signup</a></button>
   </div>
   )
@@ -196,8 +196,22 @@ export default function Navbar() {
               </Link>
             </div>
 
-            <div className='flex gap-4 items-center'>
-              {isAuthenticated ? authLinks : guestLinks}
+            <div>
+              {isAuthenticated ? (
+                <div className='flex space-x-8 p-2'>
+                  <div className='text-indigo-500 bg-[#fcdc66] items-center text-center text-2xl font-semibold w-14 h-14  justify-center flex rounded-full'>
+                    <Link href="/slide/dashboard"> {initials} </Link>
+                  </div>
+                  <button className='text-white bg-red-500 hover:bg-red-300 py-2 px-4 rounded lg:w-32 w-16'>
+                    <p onClick={handleLogout}>Logout</p>
+                  </button>
+                </div>
+              ) : (
+              <div className='md:space-x-4 flex md:px-8 px-1 gap-2 w-full'>
+                  <button className="py-4 lg:px-8 px-2 bg-white rounded border text-[#1f1073] lg:w-32 w-16"><a href="/login">Login</a></button>
+                  <button className="py-4 lg:px-8 px-2 bg-[#FFD045] rounded lg:w-32 w-16"><a href="/register">Signup</a></button>
+              </div>)
+              }
             </div>
           </div>
         </div>
@@ -213,7 +227,7 @@ export default function Navbar() {
               </button>
                 {isClick && (
                   <div className="absolute right-2 w-full px-8 text-white py-4">
-                    <div className="flex flex-col items-center text-center bg-white rounded-md shadow-md p-4 py-2 w-full">
+                    <div className="flex flex-col items-end text-end bg-white rounded-md shadow-md p-4 py-2 w-full">
               
                       <Link href="/blog" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Blog</Link>
                       
@@ -222,8 +236,8 @@ export default function Navbar() {
                      
                      
                       <button onClick={toggleDropdown} className="flex px-4 py-4  text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] items-center justify-end gap-2 font-semibold">
-                      Support {isDropdownOpen ? <IoIosArrowUp className="h-5 w-5 text-[#0A1F79] transition-all cursor-pointer" /> : <IoIosArrowDown className="h-5 w-5 text-[#0A1F79] cursor-pointer" />} 
-                      </button>
+                       {isDropdownOpen ? <IoIosArrowUp className="h-5 w-5 text-[#0A1F79] transition-all cursor-pointer" /> : <IoIosArrowDown className="h-5 w-5 text-[#0A1F79] cursor-pointer" />} 
+                       Support</button>
                       {/* Black background during dropdown menu */}
                       {isDropdownOpen && (
                         <div className="fixed inset-0 bg-black opacity-20" onClick={toggleDropdown}></div>
@@ -252,20 +266,26 @@ export default function Navbar() {
 
                         </div>
                       )}
-
-
-
-                      
-                      
-                      
-                      
-                      
-                      
                       
                       <Link href="/pricing" className="block px-4 py-4 text-[#1f1073] hover:bg-[#ffd14585] hover:scale-105 hover:transition-all hover:cursor-pointer w-full text-end border-b border-b-[#0A1F79] font-semibold">Pricing</Link>
-                      <p className='ml-28 p-2'>
-                        {isAuthenticated ? authLinks : guestLinks}
-                      </p>
+                      
+                      <div className='py-2 w-full'>
+                        {isAuthenticated ? (
+                          <div className='flex justify-end gap-4 items-center text-end'>
+                            <div className='text-indigo-500 bg-[#fcdc66] items-center text-center text-xl font-semibold w-14 h-14  justify-center flex rounded-full'>
+                              <Link href="/slide/dashboard"> {initials} </Link>
+                            </div>
+                            <button className='text-white bg-red-500 hover:bg-red-300 rounded py-4 lg:px-8 px-2 lg:w-32 w-24'>
+                              <p onClick={handleLogout}>Logout</p>
+                            </button>
+                          </div>
+                        ) : (
+                        <div className='md:space-x-4 flex md:px-8 px-1 gap-2 w-full justify-end text-end'>
+                            <button className="py-4 lg:px-8 px-2 bg-[#f5f5f5] rounded border text-[#1f1073] lg:w-32 w-24"><a href="/login">Login</a></button>
+                            <button className="py-4 lg:px-8 px-2 bg-[#FFD045] rounded lg:w-32 w-24"><a href="/register">Signup</a></button>
+                        </div>)
+                        }
+                      </div>
                     </div>
                   </div>
                 )}
