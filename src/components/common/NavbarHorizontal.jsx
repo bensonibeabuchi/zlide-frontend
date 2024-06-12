@@ -153,7 +153,7 @@ export default function NavbarHorizontal() {
     return (
         <div className="h-screen sticky z-30 md:mr-8 mr-4">
             <nav className='text-black text-lg'>
-                <div className='h-screen justify-between flex flex-col shadow-lg bg-white overflow-hidden md:py-16 py-8 md:px-8 px-1'>
+                <div className='h-screen min-h justify-between flex flex-col shadow-lg bg-white overflow-hidden md:py-16 py-8 md:px-8 px-1'>
                 <button onClick={toggleSidebar} className='absolute right-0 '>
                     {isSidebarExpanded ? <HiChevronLeft size={30} className='text-[#1F1053] items-center justify-center h-screen pb-[147px] transition-all '/> : <HiChevronRight size={30} className='items-center justify-center h-screen pb-[147px] transition-all '/> }
                 </button>
@@ -244,9 +244,9 @@ export default function NavbarHorizontal() {
                     <div>
                         { isAuthenticated? 
                         <>
-                        <p className='mb-4 bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] text-transparent bg-clip-text'>2 free {isSidebarExpanded && <span> zlides left</span>}</p> 
-                         <div className='border-black border-t pt-4 w-3/4'>
-                            <button onClick={handleLogout} className='flex items-center gap-4 my-2 p-5 pl-6 rounded text-white bg-red-700 hover:bg-red-400 hover:text-white hover:transition-all hover:cursor-pointer'><FaPowerOff size={25} />{isSidebarExpanded && <span>Logout</span>}
+                        {/* <p className='mb-4 bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] text-transparent bg-clip-text'>2 free {isSidebarExpanded && <span> zlides left</span>}</p>  */}
+                         <div>
+                            <button onClick={handleLogout} className='flex items-center gap-4 my-2 mb-24 p-5 pl-6 rounded text-white bg-red-700 hover:bg-red-400 hover:text-white hover:transition-all hover:cursor-pointer'><FaPowerOff size={25} />{isSidebarExpanded && <span>Logout</span>}
                             </button>
                         </div> 
 
