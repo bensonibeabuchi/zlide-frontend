@@ -6,7 +6,7 @@ const ErrorModal = ({ closeModal, message }) => {
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center backdrop-blur-sm z-50">
       <div className='bg-white rounded-md p-8 text-center w-96 relative'>
         <h2 className='bg-gradient-to-br from-[#1f1073] via-[#0A1F79] to-[#5D05C8] text-transparent bg-clip-text font-semibold text-lg'>We are sorry!</h2>
-        <p>The server is curretnly down but we are working round the clock to get this sorted. Please try again</p>
+        <p>The server is currently down but we are working round the clock to get this sorted. Please try again</p>
         {/* <Link href="/login">
           <button className='w-full bg-amber-300 px-8 py-4 rounded-lg my-4 hover:bg-amber-200'>Login</button>
         </Link> */}

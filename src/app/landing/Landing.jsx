@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Testimonial from '@/components/common/Testimonial';
 import { SiTesla } from "react-icons/si";
 import Pricing from '@/components/common/Pricing';
+import ErrorModal from '@/components/common/ErrorModal';
 
 
 
@@ -15,6 +16,12 @@ export default function Landing() {
   const router = useRouter();
   const [generateSlide, { isLoading }] = useGenerateSlideMutation(); // Adjust this hook according to your API slice
   const [presentationName, setPresentationName] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleChange = (event) => {
     setPresentationName(event.target.value);
@@ -29,6 +36,7 @@ export default function Landing() {
       }
     } catch (error) {
       console.error('FAILED to create presentation:', error);
+      setShowModal(true);
     }
   };
 
@@ -111,6 +119,7 @@ export default function Landing() {
       </div>
     </div>
     {isLoading && <LoadingSpinner />}
+    {showModal && <ErrorModal closeModal={closeModal} />}
     <Footer/>
     </>
   )
