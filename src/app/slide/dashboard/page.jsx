@@ -1,26 +1,46 @@
 'use client';
-import { Navbar, NavbarHorizontal } from '@/components/common'
+import { NavbarHorizontal } from '@/components/common'
 import SearchBar from '@/components/common/SearchBar';
 import Link from 'next/link';
-import Image from 'next/image';
 import React, { useState, useEffect, useRef } from "react";
-import placeholder from  '../../../../public/images/placeholder.png'
 import { HiPlus } from "react-icons/hi2";
-import { useRetrieveSlideQuery } from '@/redux/features/authApiSlice';
 import DeleteModal from '@/components/common/DeleteModal';
 import { FaTrashCan } from "react-icons/fa6";
 import axios from 'axios';
-import { ImSpinner3 } from "react-icons/im";
+
 
 
 export default function Dashboard() {
-  const { data: slides, isLoading } = useRetrieveSlideQuery();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [slideToDelete, setSlideToDelete] = useState(null);
   const [error, setError] = useState(null);
+  const [slides, setSlides] = useState([])
+
+  const fetchPresentation = async () => {
+    try {
+        const access = localStorage.getItem('access'); // Assuming you have stored the token in local storage
+        // const response = await axios.get('http://localhost:8000/api/presentation/generate-slides/', {
+        const response = await axios.get('https://zlide-backend-production.up.railway.app/api/presentation/generate-slides/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('access')}`
+        },
+        });
+        setSlides(response.data);
+        console.log(response);
+    } catch (error) {
+        console.error('PRESENTATION RETRIEVE ERROR:', error);
+        // console.error('Failed to fetch user details', error.response.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchPresentation();
+  }, []);
 
 
-    // DELETE LOGIC
+
+
+  // DELETE LOGIC
   const handleDeleteClick = (slide) => {
     setSlideToDelete(slide);
     setIsDeleteModalOpen(true);
@@ -39,6 +59,7 @@ export default function Dashboard() {
       });
       setIsDeleteModalOpen(false);
       setSlideToDelete(null);
+      window.location.reload()
     } catch (error) {
       console.error(error)
       setError(error);

@@ -11,6 +11,7 @@ import { setAuth } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { continueWithGoogle } from '@/utils';
 import SearchParamsHandler from '@/components/common/SearchParamsHandler';
+import ActivateModal from '@/components/common/ActivateModal';
 
 
 export default function Activate() {
@@ -54,10 +55,11 @@ export default function Activate() {
         dispatch(setAuth());
         toast.success(' Account Activated')
         setError(null);
-        router.push('/slide/dashboard')
+        setShowModal(true)
+        // router.push('/login')
       })
       .catch((error) => {
-        console.error(error.data)
+        console.error('OTP ERROR:' ,error)
         // toast.error(error.data.error)
         setError(error.data.error)
     });
@@ -119,9 +121,9 @@ export default function Activate() {
 
 
           <div className='text-center'>
-            <p>Dont have an account? <span className='font-bold text-[#12524f]'><a href="/register">Register</a></span></p>
+            <p>Dont have an account? <span className='font-bold text-[#1F1053]'><a href="/register">Register</a></span></p>
           </div>
-          <div>
+          {/* <div>
             <p className='text-center my-4'>OR</p>
           </div>
           <div className='flex flex-row w-full justify-center text-center items-center gap-1'>
@@ -129,11 +131,11 @@ export default function Activate() {
             <button onClick={continueWithGoogle} className='bg-white bg-transparent p-2 rounded'>      
               <Image src={google} alt="google logo" width={80} height={90} />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       {isLoading && <LoadingSpinner />} 
-      {showModal && <SuccessModal email={formData.email} />} 
+      {showModal && <ActivateModal />} 
 
     </>
   )

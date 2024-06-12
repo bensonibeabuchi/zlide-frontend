@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect  } from 'react';
 import { useGetAllTestimonialsQuery } from '@/redux/features/authApiSlice';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { FaStar } from 'react-icons/fa';
@@ -7,12 +7,30 @@ import 'swiper/css/autoplay'
 import { Autoplay } from 'swiper/modules'
 import SlidePrevButton from './SlidePrevButton';
 import SlideNextButton from './SlideNextButton';
+import axios from 'axios';
 
 export default function Testimonial() {
   const swiper = useSwiper();
-  const { data: testimonials, isLoading } = useGetAllTestimonialsQuery();
+  const [testimonials, setTestimonials]= useState([])
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const fetchTestimonial = async () => {
+    try {
+        // const response = await axios.get('http://localhost:8000/api/testimonial/');
+        const response = await axios.get('https://zlide-backend-production.up.railway.app/api/testimonial/');
+        setTestimonials(response.data);
+        setIsLoading(true);
+        console.log(response);
+    } catch (error) {
+        console.error('TESTIMONIAL RETRIEVAL ERROR:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-
+  useEffect(() => {
+    fetchTestimonial();
+  }, []);
 
   const renderStars = (rating) => {
     return (
@@ -42,7 +60,6 @@ export default function Testimonial() {
           </div>
     </div>;
   }
-
 
   return (
     <div className='bg-gradient-to-br from-[#1f1073] from-10% via-[#0A1F79] via-30% to-[#5D05C8] to-90% md:p-16 p-6 items-center justify-center'> 

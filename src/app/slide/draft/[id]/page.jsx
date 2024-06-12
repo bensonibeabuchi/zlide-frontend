@@ -67,6 +67,7 @@ export default function DetailSlide() {
             });
             setResponse(result.data);
             router.push('/slide/dashboard'); 
+            
             return result.data; 
         } catch (error) {
             console.error(error);
@@ -191,7 +192,7 @@ export default function DetailSlide() {
                                                                 placeholder='Enter content'
                                                                 value={slides.content}
                                                                 onChange={(e) => handleSlideChange(index, e)}
-                                                                className='md:h-64 h-32 text-[8px]'
+                                                                className='md:h-64 h-32 lg:text-base text-[8px]'
                                                             />
                                                         </div>
                                                         <div key={slides.id}>

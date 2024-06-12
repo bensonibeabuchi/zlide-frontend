@@ -2,10 +2,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { IoIosClose } from 'react-icons/io';
-import PasswordEmailModal from '../../components/common/PasswordEmailModal';
 import LoadingSpinner from '../../components/common/Loading';
-
-import { useResetPasswordMutation } from '@/redux/features/authApiSlice';
 import { useResendOtpMutation } from '@/redux/features/authApiSlice';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
@@ -16,11 +13,8 @@ import ResendOtpModal from '@/components/common/ResendOtpModal';
 
 export default function PasswordReset() {
 
-  // const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const [resendOtp, { isLoading }] = useResendOtpMutation();
-
   const [email, setEmail] = useState('');
-
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
@@ -44,9 +38,9 @@ export default function PasswordReset() {
         setShowModal(true);
       })
       .catch((error) => {
-        console.error(error.data)
-        toast.error(error.data.detail)
-        setError(error.data.detail)
+        console.error('RESEND OTP ERROR:',error)
+        // toast.error(error.data.error)
+        setError(error.data.error)
     });
   };
 
@@ -86,15 +80,9 @@ export default function PasswordReset() {
 
 
           <div className='text-center'>
-            <p>Dont have an account? <span className='font-bold text-indigo-700'><a href="/auth/register">Register</a></span></p>
+            <p>Dont have an account? <span className='font-bold text-indigo-700'><a href="/register">Register</a></span></p>
           </div>
-          <div>
-            <p className='text-center my-4'>OR</p>
-          </div>
-          <div className='flex flex-row w-full justify-center text-center items-center gap-1'>
-            <p className='font-light'>Login with </p>
-            <Image src="/images/google.png" alt="google logo" width={80} height={90} className='' />
-          </div>
+       
         </div>
       </div>
       {isLoading && <LoadingSpinner />} 

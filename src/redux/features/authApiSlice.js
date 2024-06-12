@@ -1,6 +1,7 @@
 import { apiSlice } from '../services/apiSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
+  
   endpoints: builder => ({
 
     retrieveUser: builder.query({
@@ -79,13 +80,23 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: { uid, token, new_password, re_new_password },
       }),
     }),
-
+    
     generateSlide: builder.mutation({
-      query: ( user_input ) => ({
-        url: '/presentation/generate-slides/',
-        method: 'POST',
-        body: { user_input },
-      }),
+      query: (user_input) => {
+        const accessToken = localStorage.getItem('access');
+        const headers = {};
+    
+        if (accessToken) {
+          headers.Authorization = `JWT ${accessToken}`;
+        }
+    
+        return {
+          url: '/presentation/generate-slides/',
+          method: 'POST',
+          headers,
+          body: { user_input },
+        };
+      },
     }),
 
     retrieveSlide: builder.query({

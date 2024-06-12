@@ -1,5 +1,4 @@
 'use client';
-{/* text-[#FFD045] bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] */}
 import React, { useState, useEffect } from 'react';
 import { HiPencilSquare, HiClock, HiArrowRightEndOnRectangle, HiMiniRectangleGroup, HiMiniTrash, HiCog6Tooth, HiChevronLeft, HiChevronRight, HiArrowLeftStartOnRectangle } from "react-icons/hi2";
 import { useRouter, usePathname } from 'next/navigation';
@@ -9,17 +8,59 @@ import { logout as setLogout } from '@/redux/features/authSlice';
 import { useLogoutMutation } from '@/redux/features/authApiSlice';
 import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
 import { FaPowerOff } from "react-icons/fa6";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+axios.defaults.withCredentials = true;
+
 
 
 export default function NavbarHorizontal() {
-    const { data: user, isLoading, isError } = useRetrieveUserQuery();
-    const dispatch = useAppDispatch();
-    const { isAuthenticated } = useAppSelector(state => state.auth);
-    const [logout] = useLogoutMutation();
+    // const { data: user, isLoading, isError } = useRetrieveUserQuery();
+    // const dispatch = useAppDispatch();
+    // const { isAuthenticated } = useAppSelector(state => state.auth);
+    // const [logout] = useLogoutMutation();
     const router = useRouter();
     const [activeButton, setActiveButton] = useState('dashboard');
     const pathname = usePathname();
     const id = pathname.split('/').pop();
+    const [user, setUser] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+
+   // Function to retrieve user details
+   const fetchUserDetails = async () => {
+    try {
+        const access = localStorage.getItem('access'); // Assuming you have stored the token in local storage
+        const refresh = localStorage.getItem('refresh'); // Assuming you have stored the token in local storage
+        // const response = await axios.get('http://localhost:8000/api/users/me/', {
+        const response = await axios.get('https://zlide-backend-production.up.railway.app/api/users/me/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('access')}`
+        },
+        });
+        setUser(response.data);
+        setIsAuthenticated(true);
+        console.log('User Data:', response.data); // Log the user data
+        
+        } catch (error) {
+            // console.error('Failed to fetch user details', error);
+            if (error.response) {
+                console.error('FAILED TO GET USER RESPONSE Data:', error.response.data);
+            }
+        }
+        };
+
+        useEffect(() => {
+            fetchUserDetails();
+        }, []); 
+
+    const handleLogout = () => {
+        localStorage.removeItem('access'); // Remove the token from local storage on logout
+        localStorage.removeItem('refresh'); // Remove the token from local storage on logout
+        setUser(null); // Clear user data
+        router.push('/'); // Redirect to login page
+    };
+
     
      // Initialize state with value from localStorage, or default to true
      const [isSidebarExpanded, setIsSidebarExpanded] = useState(() => {
@@ -49,15 +90,17 @@ export default function NavbarHorizontal() {
         setIsSidebarExpanded(prevState => !prevState);
     };
 
-    const handleLogout = () => {
-        logout()
-        .unwrap()
-        .then(() => {dispatch(setLogout());
-       })
-      .finally( () => {
-        router.push('/')
-     })
-     }
+    // const handleLogout = () => {
+    //     logout()
+    //     .unwrap()
+    //     .then(() => {dispatch(setLogout());
+    //    })
+    //   .finally( () => {
+    //     router.push('/')
+    //  })
+    //  }
+
+    
 
     const getInitials = (firstName, lastName) => {
       const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';
@@ -119,11 +162,11 @@ export default function NavbarHorizontal() {
                         <div className='flex space-x-2 overflow-hidden truncate w-full'> 
                             {isAuthenticated ?
                             <>
-                            <div className='text-indigo-500 bg-[#FFD045] items-center text-center text-2xl font-semibold p-4 justify-center flex rounded-full'>
+                            <div className='text-indigo-500 bg-[#FFD045] items-center text-center text-2xl font-semibold p-4 px-5 justify-center flex rounded-full'>
                                     <p className='bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] text-transparent bg-clip-text'> {initials} </p>
-                                </div>
+                            </div>
                                 {isSidebarExpanded && (
-                                <div className='truncate overflow-hidden'>
+                            <div className='truncate overflow-hidden'>
                                     <p className='truncate overflow-hidden bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] text-transparent bg-clip-text font-medium '>{fullName}</p>
                                     <p className='truncate overflow-hidden bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] text-transparent bg-clip-text font-light'>{user?.email}</p>
                                 </div>

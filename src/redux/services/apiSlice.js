@@ -7,8 +7,8 @@ import { Mutex } from 'async-mutex';
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://zlide-backend-production.up.railway.app/api',
-  // baseUrl: 'http://localhost:8000/api',
+  // baseUrl: 'https://zlide-backend-production.up.railway.app/api',
+  baseUrl: 'http://localhost:8000/api',
   credentials: 'include',
 });
 
@@ -28,7 +28,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
           {
             url: '/jwt/refresh/',
             method: 'POST',
-			body: { refresh: refreshToken }, // Include the refresh token in the request body
+            headers: {
+              Authorization: `JWT ${localStorage.getItem('access')}`
+          },
+    			body: { refresh: refreshToken }, // Include the refresh token in the request body
           },
           api,
           extraOptions

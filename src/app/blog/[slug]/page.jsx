@@ -6,21 +6,45 @@ import { usePathname, } from 'next/navigation';
 import { useGetSingleBlogQuery } from '@/redux/features/authApiSlice';
 import { ErrorModal, Footer, LoadingSpinner, Navbar, ShareButton } from '@/components/common';
 import Link from 'next/link';
+import axios from 'axios';
 import { FaRegCopyright, FaLinkedin, FaFacebook, FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
 
 export default function DetailSlide() {
 const pathname = usePathname();
 const slug = pathname.split('/').pop();
-const { data: blog, isLoading, isError } = useGetSingleBlogQuery(slug);
+// const { data: blog, isLoading, isError } = useGetSingleBlogQuery(slug);
 const blogUrl = `http://localhost:3000${pathname}`;
 const blogUrl2 = `https://zlide-ben.vercel.app${pathname}`;
 const [isModalVisible, setIsModalVisible] = useState(false);
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState(false);
+const [ blog, setBlogs ] = useState([]);
+
+
+const fetchSingleBlog = async () => {
+    setIsLoading(true);
+    try {
+        // const response = await axios.get(`http://localhost:8000/api/blog/${slug}`);
+        const response = await axios.get(`https://zlide-backend-production.up.railway.app/api/blog/${slug}`);
+        setBlogs(response.data);
+        console.log(response);
+    } catch (error) {
+        console.error('BLOG RETRIEVAL ERROR:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSingleBlog();
+  }, );
+
 
 useEffect(() => {
-if (isError) {
+if (error) {
 setIsModalVisible(true);
 }
-}, [isError]);
+}, [error]);
 
 const closeModal = () => {
 setIsModalVisible(false);
@@ -31,7 +55,7 @@ return
 <LoadingSpinner />;
 }
 
-if (isError) {
+if (error) {
 return isModalVisible &&
 <ErrorModal closeModal={closeModal} message="Failed to load blog data." />;
 }

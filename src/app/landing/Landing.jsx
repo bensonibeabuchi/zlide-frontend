@@ -25,11 +25,10 @@ export default function Landing() {
     try {
       const newPresentation = await generateSlide({ name: presentationName }).unwrap();
       if (newPresentation) {
-        // Assuming the API returns an ID for the new presentation
         router.push(`/slide/draft/${newPresentation.id}`);
       }
     } catch (error) {
-      console.error('Failed to create presentation:', error);
+      console.error('FAILED to create presentation:', error);
     }
   };
 

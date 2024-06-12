@@ -1,12 +1,34 @@
 'use client';
-import React, { useState } from 'react';;
+import React, { useState, useEffect } from 'react';;
 import {Navbar, Footer, LoadingSpinner} from '@/components/common/'
 import Image from 'next/image';
-import { useGetAllBlogQuery } from '@/redux/features/authApiSlice';
+// import { useGetAllBlogQuery } from '@/redux/features/authApiSlice';
 import Link from 'next/link';
+import axios from 'axios';
 
 export default function Blog() {
-const { data: blogs, isLoading } = useGetAllBlogQuery();
+// const { data: blogs, isLoading } = useGetAllBlogQuery();
+const [ blogs, setBlogs] = useState([]);
+const [isLoading, setIsLoading] = useState(false);
+
+const fetchBlog = async () => {
+    try {
+        // const response = await axios.get('http://localhost:8000/api/blog/');
+        const response = await axios.get('https://zlide-backend-production.up.railway.app/api/blog/');
+        setBlogs(response.data);
+        setIsLoading(true);
+        console.log(response);
+    } catch (error) {
+        console.error('BLOG RETRIEVAL ERROR:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlog();
+  }, []);
+
 
 // PAGINATION LOGIC
 const [currentPage, setCurrentPage] = useState(1);

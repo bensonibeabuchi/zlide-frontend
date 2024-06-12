@@ -12,28 +12,67 @@ import { FaBars } from "react-icons/fa";
 import { RiCloseLargeFill } from "react-icons/ri";
 import Link from 'next/link';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import axios from 'axios';
+import cookies from 'next-cookies';
 
 
 
 
 
 export default function Navbar() {
-  const { data: user, isLoading, isError } = useRetrieveUserQuery();
+  // const { data: user, isLoading, isError } = useRetrieveUserQuery();
   const [scrolling, setScrolling] = useState(false);
-  const dispatch = useAppDispatch();
-  const { isAuthenticated } = useAppSelector(state => state.auth);
-  const [logout] = useLogoutMutation();
+  // const dispatch = useAppDispatch();
+  // const { isAuthenticated } = useAppSelector(state => state.auth);
+  // const [logout] = useLogoutMutation();
   const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLogout = () => {
-    logout()
-    .unwrap()
-    .then(() => {dispatch(setLogout());
-    })
-    .finally( () => {
-      router.push('/')
-  })
-  }
+  // Function to retrieve user details
+  const fetchUserDetails = async () => {
+    try {
+        const access = localStorage.getItem('access'); // Assuming you have stored the token in local storage
+        const refresh = localStorage.getItem('refresh'); // Assuming you have stored the token in local storage
+        // const response = await axios.get('http://localhost:8000/api/users/me/', {
+        const response = await axios.get('https://zlide-backend-production.up.railway.app/api/users/me/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('access')}`
+        },
+        });
+
+        setUser(response.data);
+        setIsAuthenticated(true);
+        console.log('User Data:', response.data); // Log the user data
+        
+        } catch (error) {
+            console.error('Failed to fetch user details', error);
+            if (error.response) {
+                console.error('Error RESPONSE Data:', error.response.data);
+            }
+        }
+        };
+
+        useEffect(() => {
+            fetchUserDetails();
+        }, []); 
+
+    const handleLogout = () => {
+        localStorage.removeItem('access'); // Remove the token from local storage on logout
+        localStorage.removeItem('refresh'); // Remove the token from local storage on logout
+        setUser(null); // Clear user data
+        router.push('/'); // Redirect to login page
+    };
+
+  // const handleLogout = () => {
+  //   logout()
+  //   .unwrap()
+  //   .then(() => {dispatch(setLogout());
+  //   })
+  //   .finally( () => {
+  //     router.push('/')
+  // })
+  // }
 
   const getInitials = (firstName, lastName) => {
     const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';

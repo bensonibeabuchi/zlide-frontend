@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
 const initialState = {
   isAuthenticated: false,
   isLoading: true,
@@ -10,13 +9,13 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuth: state => {
+    setAuth: (state) => {
       state.isAuthenticated = true;
     },
-    logout: state => {
+    logout: (state) => {
       state.isAuthenticated = false;
     },
-    finishInitialLoad: state => {
+    finishInitialLoad: (state) => {
       state.isLoading = false;
     },
   },

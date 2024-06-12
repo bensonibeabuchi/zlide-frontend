@@ -1,15 +1,14 @@
-import Landing from "./landing/Landing";
 import Provider from '@/redux/provider.jsx';
 import { Setup } from "@/components/utils";
 
 
-export default function Home() {
+export default function Layout({ children }) {
   return (
-    <main>
+      <div>
         <Provider>
           <Setup/>
-            <Landing/>
+            {children}
         </Provider>
-    </main>
+        </div>
   );
 }

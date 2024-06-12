@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
 import { IoMdEyeOff, IoMdEye, IoIosClose } from 'react-icons/io';
-import SuccessModal from '../../components/common/SuccessModal';
+import LoginSuccess from '../../components/common/LoginSuccess';
 import LoadingSpinner from '../../components/common/Loading';
 import { useLoginMutation } from '@/redux/features/authApiSlice';
 import { toast } from 'react-toastify';
@@ -12,15 +12,17 @@ import { setAuth } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { continueWithGoogle } from '@/utils';
 import logo from '../../../public/images/zlide-logohead-black.png'
+import axios from 'axios';
+import axiosInstance from '@/components/utils/axiosInstance';
 
 export default function SignUp() {
-    const [login, { isLoading }] = useLoginMutation();
+
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [isEyeOn, setisEyeOn] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const router = useRouter();
-    const dispatch = useAppDispatch();
+    const [isLoading, setIsLoading] = useState(false);
 
     const toggleEyeOn = () => { setisEyeOn(!isEyeOn);};
 
@@ -40,21 +42,35 @@ export default function SignUp() {
       setFormData({ ...formData, [name]: value})
       };
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
       event.preventDefault();
-      login({ email, password, })
-      .unwrap()
-      .then(() => {
-      dispatch(setAuth());
-      toast.success(' Logged in successfully')
-      setError(null);
-      router.push('/slide/dashboard')
-      })
-      .catch((error) => {
-      console.error(error.data)
-      // toast.error('Email or Password is incorrect')
-      setError('Email or Password is incorrect')
-      });
+      setIsLoading(true);
+
+      try {
+        // const response = await axiosInstance.post('http://localhost:8000/api/login/', {
+        const response = await axiosInstance.post('https://zlide-backend-production.up.railway.app/api/login/', {
+          email,
+          password,
+        });
+        
+        const access = response.data.access;
+        const refresh = response.data.refresh;
+
+        localStorage.setItem('access', access); // Store in local storage if needed
+        localStorage.setItem('refresh', refresh);
+
+        setShowModal(true);
+        toast.success('Login successful!');
+        router.push('/slide/dashboard');  // Redirect to the dashboard or any other page
+
+      } catch (error) {
+        console.error('ERROR HERE:', error);
+        setError('Login failed. Please check your credentials and try again.');
+        toast.error('Login failed. Please check your credentials and try again.');
+      } finally {
+        setIsLoading(false);
+      }
+      
       };
 
 return (
@@ -126,7 +142,7 @@ return (
   {isLoading &&
   <LoadingSpinner />}
   {showModal &&
-  <SuccessModal email={formData.email} />}
+  <LoginSuccess/>}
 
 </>
 )

@@ -1,18 +1,17 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { IoMdEyeOff, IoMdEye, IoIosClose } from 'react-icons/io';
 import { useRegisterMutation } from '@/redux/features/authApiSlice';
 import { useRouter } from 'next/navigation';
-import Head from 'next/head';
 import SocialButtons from '@/components/common/SocialButtons';
 import {SuccessModal, LoadingSpinner} from '@/components/common';
 import logo from '../../../public/images/zlide-logohead-black.png'
 import Link from 'next/link';
 
 
+
 export default function Register() {
-  const [register, { isLoading }] = useRegisterMutation();
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
@@ -20,6 +19,7 @@ export default function Register() {
   const [isReEyeOn, setisReEyeOn] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const [ register, { isLoading } ] = useRegisterMutation()
 
   const toggleEyeOn = () => { setisEyeOn(!isEyeOn);};
   const toggleReEyeOn = () => { setisReEyeOn(!isReEyeOn);};
@@ -88,144 +88,145 @@ export default function Register() {
 
 
   return (
+    
     <>
-    <Link href="/">
-      <Image src={logo} width={50} height={70} alt='logo' className=' relative left-2/4 justify-center mt-8' />
-    </Link>
-    <div className='flex flex-col mt-8 md:h-screen mx-auto justify-center items-center'>
-        <div className='bg-[#F8F8F6] md:w-[650px] rounded-lg p-12'>
-        
-        <h1 className='font-semibold md:text-4xl text-2xl bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text '>Sign Up</h1> 
-          
-          <form className='p-4 mt-4' method='POST' onSubmit={onSubmit}>
+             
+        <Link href="/">
+        <Image src={logo} width={50} height={70} alt='logo' className=' relative left-2/4 justify-center mt-8' />
+        </Link>
+        <div className='flex flex-col lg:mt-1 mt-8 md:h-screen mx-auto justify-center items-center'>
+            <div className='bg-[#F8F8F6] md:w-[650px] rounded-lg p-12'>
             
-
-            {/* Email INPUT */}
-
-            <div className='flex flex-col py-2'>
-
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email</label>
-              <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder='Enter Work email'
-              value={formData.email}
-              onChange={onChange}
-              required
-              className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-              />
-
-            </div>
-
-
-            {/* First Name INPUT */}
-
-            <div className='flex flex-col py-2'>
-
-              <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">First Name</label>
-
-              <input
-              type="first_name"
-              name="first_name"
-              id="first_name"
-              placeholder='First Name'
-              value={formData.first_name}
-              onChange={onChange}
-              required
-              className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-              />
+            <h1 className='font-semibold md:text-4xl text-2xl bg-gradient-to-r from-[#1F1053] via-[#0A1F79] to-[#5D05C8] inline-block text-transparent bg-clip-text '>Sign Up</h1> 
             
-            </div>
+            <form className='p-4 mt-4' method='POST' onSubmit={onSubmit}>
+                
 
+                {/* Email INPUT */}
+
+                <div className='flex flex-col py-2'>
+
+                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder='Enter Work email'
+                value={formData.email}
+                onChange={onChange}
+                required
+                className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                />
+
+                </div>
+
+
+                {/* First Name INPUT */}
+
+                <div className='flex flex-col py-2'>
+
+                <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">First Name</label>
+
+                <input
+                type="first_name"
+                name="first_name"
+                id="first_name"
+                placeholder='First Name'
+                value={formData.first_name}
+                onChange={onChange}
+                required
+                className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                />
+                
+                </div>
+
+                
+                {/* Last Name INPUT */}
+
+                <div className='flex flex-col py-2'>
+
+                <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                <input
+                type="last_name"
+                name="last_name"
+                id="last_name"
+                placeholder='Last Name'
+                value={formData.last_name}
+                onChange={onChange}
+                required
+                className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                />
+
+                </div>
+
+                {/* Password INPUT */}
+
+                <div className='flex relative flex-col py-2'>
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+
+                <button type='button' onClick={toggleEyeOn}> {isEyeOn ? <IoMdEye className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowPassword} /> : <IoMdEyeOff className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowPassword} />} </button>
+
+                <input 
+                type={showPassword ? 'text' : 'password'} 
+                name="password" 
+                id="password" 
+                placeholder='Enter Password' 
+                value={formData.password} 
+                onChange={onChange} 
+                className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                required/>
+
+                <small className='text-xs text-red-500 mb-4 '>Password should contain a capital letter, number and a special character</small>
+                </div>
+
+
+                {/* Confirm Password INPUT */}
+
+                <div className='flex relative flex-col py-2'>
+                <label htmlFor="re_password" className="block text-sm font-medium leading-6 text-gray-900"> Confirm Password</label>
+
+                <button type='button' onClick={toggleReEyeOn}> {isReEyeOn ? <IoMdEye className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowRePassword} /> : <IoMdEyeOff className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowRePassword} />} </button>
+
+                <input 
+                type={showRePassword ? 'text' : 'password'} 
+                name="re_password" 
+                id="re_password" 
+                placeholder='Confirm Password' 
+                value={formData.re_password} 
+                onChange={onChange} 
+                className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                required/>
+
+                </div>
+
+                {/* Button */}
+                <div>
+                <button type="submit"
+                className='w-full bg-amber-300 px-8 py-3 rounded-lg my-4 hover:bg-amber-200'>
+                    Sign Up
+                </button>
+                </div>
+            </form>
             
-            {/* Last Name INPUT */}
+            {error && <div className="text-white relative p-4 mt-4 text-center rounded-md justify-center w-11/12 mx-auto mb-12 bg-red-500"> <button onClick={toggleError} >< IoIosClose  size={24} className=' bg-black text-white rounded-full absolute -top-3 left-[490px] mr-8'/></button>  {error}  </div>}
 
-            <div className='flex flex-col py-2'>
 
-              <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
-              <input
-              type="last_name"
-              name="last_name"
-              id="last_name"
-              placeholder='Last Name'
-              value={formData.last_name}
-              onChange={onChange}
-              required
-              className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-              />
-
+            <div className='text-center'>
+                <p>Already have an account? <span className='font-bold text-[#1F1053]'><a href="/login">Login</a></span></p>
             </div>
-
-            {/* Password INPUT */}
-
-            <div className='flex relative flex-col py-2'>
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
-
-              <button type='button' onClick={toggleEyeOn}> {isEyeOn ? <IoMdEye className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowPassword} /> : <IoMdEyeOff className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowPassword} />} </button>
-
-              <input 
-              type={showPassword ? 'text' : 'password'} 
-              name="password" 
-              id="password" 
-              placeholder='Enter Password' 
-              value={formData.password} 
-              onChange={onChange} 
-              className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-              required/>
-
-              <small className='text-xs text-red-500 mb-4 '>Password should contain a capital letter, number and a special character</small>
+            {/* <div>
+                <p className='text-center my-4'>OR</p>
             </div>
-
-
-            {/* Confirm Password INPUT */}
-
-            <div className='flex relative flex-col py-2'>
-              <label htmlFor="re_password" className="block text-sm font-medium leading-6 text-gray-900"> Confirm Password</label>
-
-              <button type='button' onClick={toggleReEyeOn}> {isReEyeOn ? <IoMdEye className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowRePassword} /> : <IoMdEyeOff className='absolute md:left-[480px] left-[220px] top-[50px] hover:cursor-pointer' size={18} onClick={toggleShowRePassword} />} </button>
-
-              <input 
-              type={showRePassword ? 'text' : 'password'} 
-              name="re_password" 
-              id="re_password" 
-              placeholder='Confirm Password' 
-              value={formData.re_password} 
-              onChange={onChange} 
-              className="block w-full rounded-md border-0 py-3 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-              required/>
-
+            <div className='flex flex-row w-full justify-center text-center items-center gap-1'>
+            
+                <SocialButtons/>
+            </div> */}
             </div>
-
-            {/* Button */}
-            <div>
-              <button type="submit"
-              className='w-full bg-amber-300 px-8 py-3 rounded-lg my-4 hover:bg-amber-200'>
-                Sign Up
-              </button>
-            </div>
-          </form>
-          
-          {error && <div className="text-white relative p-4 mt-4 text-center rounded-md justify-center w-11/12 mx-auto mb-12 bg-red-500"> <button onClick={toggleError} >< IoIosClose  size={24} className=' bg-black text-white rounded-full absolute -top-3 left-[490px] mr-8'/></button>  {error}  </div>}
-
-
-          <div className='text-center'>
-            <p>Already have an account? <span className='font-bold text-[#1F1053]'><a href="/login">Login</a></span></p>
-          </div>
-          <div>
-            <p className='text-center my-4'>OR</p>
-          </div>
-          <div className='flex flex-row w-full justify-center text-center items-center gap-1'>
-          
-            <SocialButtons/>
-          </div>
         </div>
-      </div>
-
       {isLoading && <LoadingSpinner />} 
-
       {showModal && <SuccessModal email={formData.email} />} 
-
+    
     </>
+
   )
 }

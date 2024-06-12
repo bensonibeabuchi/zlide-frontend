@@ -52,13 +52,13 @@ export default function Zlide() {
                 <label htmlFor="presentation" className='text-[#1F1053] md:text-xl font-medium'>
                   What presentation do you want to create?
                 </label>
-                <textarea
+                <input
                   id="presentation"
                   name="user_input"
                   placeholder='Prompt'
                   value={userInput}
                   onChange={handleChange}
-                  className='p-4 h-32 w-full justify-start text-start rounded-md border-gray-300 border-2'
+                  className='p-6 w-full justify-start text-start rounded-md border-gray-300 border-2'
                 />
                 <button type="submit" className='bg-[#FFD045] py-4 md:px-8 w-full rounded-md text-[#1F1053] font-medium'>
                   Start Generating
