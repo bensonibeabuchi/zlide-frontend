@@ -29,7 +29,7 @@ export default function Zlide() {
       const result = await generateSlide({ user_input: userInput }).unwrap();
       setResponse(result);
       console.log(result);
-      toast.success('Slide Generated');
+      // toast.success('Slide Generated');
       router.push(`/slide/draft/${result.id}`);
     } catch (error) {
       console.error(error);

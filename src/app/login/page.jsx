@@ -60,13 +60,13 @@ export default function SignUp() {
         localStorage.setItem('refresh', refresh);
 
         setShowModal(true);
-        toast.success('Login successful!');
+        // toast.success('Login successful!');
         router.push('/slide/dashboard');  // Redirect to the dashboard or any other page
 
       } catch (error) {
         console.error('ERROR HERE:', error);
         setError('Login failed. Please check your credentials and try again.');
-        toast.error('Login failed. Please check your credentials and try again.');
+        // toast.error('Login failed. Please check your credentials and try again.');
       } finally {
         setIsLoading(false);
       }
