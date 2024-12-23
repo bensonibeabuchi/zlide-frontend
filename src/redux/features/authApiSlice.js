@@ -83,21 +83,25 @@ const authApiSlice = apiSlice.injectEndpoints({
     
     generateSlide: builder.mutation({
       query: (user_input) => {
-        const accessToken = localStorage.getItem('access');
-        const headers = {};
+        const accessToken = localStorage.getItem('access'); // Retrieve the JWT token from localStorage
+        const headers = {
+          "Content-Type": "application/json",
+        };
     
+        // Include Authorization header if the token is available
         if (accessToken) {
           headers.Authorization = `JWT ${accessToken}`;
         }
     
         return {
-          url: '/presentation/generate-slides/',
-          method: 'POST',
-          headers,
-          body: { user_input },
+          url: '/presentation/generate-slides/', // API endpoint
+          method: 'POST', // HTTP method
+          headers, // Headers including Authorization if token exists
+          body: { user_input }, // Request body
         };
       },
     }),
+    
 
     retrieveSlide: builder.query({
       query: () => '/presentation/generate-slides/',

@@ -1,19 +1,17 @@
 'use client';
 import { NavbarHorizontal } from '@/components/common';
 import { useRouter } from 'next/navigation';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { LoadingSpinner } from '@/components/common';
-import { useGenerateSlideMutation } from '@/redux/features/authApiSlice';
-import { toast } from 'react-toastify';
 import ErrorModal from '@/components/common/ErrorModal';
 
 export default function Zlide() {
   const router = useRouter();
   const [userInput, setUserInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [generateSlide, { isLoading }] = useGenerateSlideMutation();
 
   const closeModal = () => {
     setShowModal(false);
@@ -25,17 +23,45 @@ export default function Zlide() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Show loading spinner
+    setError(false); // Reset error state
+
     try {
-      const result = await generateSlide({ user_input: userInput }).unwrap();
+      // Get the JWT token from localStorage
+      const accessToken = localStorage.getItem('access');
+      if (!accessToken) {
+        throw new Error('Authentication token is missing. Please log in.');
+      }
+
+      // Prepare the request headers
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${accessToken}`,
+      };
+
+      // Make the API request
+      // const response = await fetch('http://localhost:8000/api/presentation/generate-slides/', {
+      const response = await fetch('https://zlide-backend-production.up.railway.app/api/presentation/generate-slides/', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ user_input: userInput }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API call failed with status ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      // Set the response and redirect to the draft page
       setResponse(result);
-      console.log(result);
-      // toast.success('Slide Generated');
       router.push(`/slide/draft/${result.id}`);
     } catch (error) {
-      console.error(error);
-      setShowModal(true);
-      // toast.error('Error creating slide');
+      console.error('Error generating slide:', error);
       setError(true);
+      setShowModal(true); // Show the error modal
+    } finally {
+      setIsLoading(false); // Hide loading spinner
     }
   };
 
@@ -43,7 +69,7 @@ export default function Zlide() {
     <>
       <div className='dot-background min-h-screen fixed w-screen flex'>
         <div className='grid grid-flow-col'>
-          <div className="">
+          <div>
             <NavbarHorizontal />
           </div>
           <div className='h-screen overflow-auto'>
@@ -64,17 +90,6 @@ export default function Zlide() {
                   Start Generating
                 </button>
               </form>
-            </div>
-            <div className='grid grid-cols-4 w-full p-4 pr-16 mt-16 gap-24'>
-              {response ? (
-
-                <>
-                </>
-              ) : (
-                <>
-                </>
-              )}
-              
             </div>
           </div>
         </div>
